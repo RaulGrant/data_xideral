@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarea 6 | Pipeline AWS Lambda</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #12091f;
+            --bg-soft: #1a1030;
+            --panel: rgba(29, 16, 49, 0.84);
+            --panel-strong: #1a1031;
+            --panel-alt: #261746;
+            --border: rgba(196, 132, 252, 0.18);
+            --line: rgba(255, 255, 255, 0.08);
+            --text: #f4ecff;
+            --heading: #f7d8ff;
+            --body: #d2c2ea;
+            --soft: #b89fd8;
+            --violet: #c084fc;
+            --violet-strong: #a855f7;
+            --lavender: #ddd6fe;
+            --pink: #f9a8d4;
+            --gold: #f8c56b;
+            --shadow: 0 24px 80px rgba(10, 4, 20, 0.5);
+            --radius-xl: 28px;
+            --radius-lg: 20px;
+            --radius-md: 16px;
+            --radius-sm: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Space Grotesk", sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(192, 132, 252, 0.18), transparent 28%),
+                radial-gradient(circle at top right, rgba(249, 168, 212, 0.14), transparent 24%),
+                radial-gradient(circle at 50% 120%, rgba(168, 85, 247, 0.2), transparent 30%),
+                linear-gradient(180deg, #0f081a 0%, #160c26 38%, #12091f 100%);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.65;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+            background-size: 32px 32px;
+            mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.65), transparent 92%);
+            pointer-events: none;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .page {
+            width: min(1180px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 32px 0 80px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            border-radius: 999px;
+            text-decoration: none;
+            color: var(--soft);
+            border: 1px solid var(--border);
+            background: rgba(20, 10, 34, 0.68);
+            backdrop-filter: blur(14px);
+            transition: transform 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+        }
+
+        .back-link:hover {
+            transform: translateY(-2px);
+            color: var(--text);
+            border-color: rgba(192, 132, 252, 0.42);
+        }
+
+        .hero {
+            margin-top: 28px;
+            padding: 40px;
+            border-radius: var(--radius-xl);
+            background: linear-gradient(135deg, rgba(24, 12, 40, 0.98), rgba(41, 21, 70, 0.9));
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            right: -70px;
+            top: -40px;
+            background: radial-gradient(circle, rgba(248, 197, 107, 0.34), rgba(248, 197, 107, 0.12) 34%, transparent 72%);
+            filter: blur(10px);
+            opacity: 0.9;
+            animation: golden-float 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: auto 10% -120px auto;
+            width: 420px;
+            height: 160px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, transparent 0%, rgba(248, 197, 107, 0.08) 30%, rgba(255, 232, 179, 0.22) 50%, rgba(248, 197, 107, 0.08) 70%, transparent 100%);
+            filter: blur(20px);
+            transform: rotate(-10deg);
+            animation: golden-sweep 7.5s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .hero > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes golden-float {
+            0%, 100% {
+                transform: translate3d(0, 0, 0) scale(1);
+                opacity: 0.72;
+            }
+            50% {
+                transform: translate3d(-18px, 16px, 0) scale(1.08);
+                opacity: 1;
+            }
+        }
+
+        @keyframes golden-sweep {
+            0%, 100% {
+                transform: rotate(-10deg) translateX(0);
+                opacity: 0.22;
+            }
+            50% {
+                transform: rotate(-8deg) translateX(-20px);
+                opacity: 0.5;
+            }
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(192, 132, 252, 0.11);
+            color: var(--pink);
+            border: 1px solid rgba(249, 168, 212, 0.24);
+            font-size: 0.84rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5.8vw, 4.8rem);
+            line-height: 0.96;
+            margin-top: 20px;
+            max-width: 760px;
+        }
+
+        .hero h1 span {
+            color: var(--heading);
+            text-shadow: 0 0 28px rgba(192, 132, 252, 0.18);
+        }
+
+        .hero-copy {
+            max-width: 720px;
+            color: var(--body);
+            font-size: 1.05rem;
+            margin-top: 18px;
+        }
+
+        .hero-grid {
+            margin-top: 28px;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 18px;
+        }
+
+        .hero-card,
+        .section,
+        .metric,
+        .code-frame,
+        .data-card,
+        .capture-card,
+        .structure-card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            backdrop-filter: blur(16px);
+        }
+
+        .hero-card {
+            padding: 22px;
+        }
+
+        .hero-card h2,
+        .section h2 {
+            font-size: 1.15rem;
+            margin-bottom: 8px;
+        }
+
+        .hero-card p,
+        .section p,
+        .metric p,
+        .data-card p,
+        .capture-card p {
+            color: var(--body);
+        }
+
+        .stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .chip {
+            padding: 9px 12px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--lavender);
+            font-size: 0.9rem;
+        }
+
+        .metric-list {
+            display: grid;
+            gap: 14px;
+        }
+
+        .metric {
+            padding: 20px;
+        }
+
+        .metric strong {
+            display: block;
+            font-size: 1.9rem;
+            color: var(--gold);
+            margin-bottom: 6px;
+        }
+
+        .section {
+            margin-top: 24px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+        }
+
+        .section-head {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            align-items: end;
+            margin-bottom: 22px;
+        }
+
+        .section-label {
+            font-size: 0.82rem;
+            color: var(--pink);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 8px;
+        }
+
+        .section h2,
+        .hero-card h2,
+        .info-card h3,
+        .card-head h3 {
+            color: var(--heading);
+        }
+
+        .section > p,
+        .section-head p,
+        .info-card p,
+        .card-head p,
+        .flow-step span,
+        .flow-step small,
+        .flow-trigger,
+        .note,
+        .capture-placeholder {
+            color: var(--body);
+        }
+
+        .flow-grid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 12px;
+            align-items: center;
+        }
+
+        .flow-step,
+        .flow-arrow {
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border-radius: var(--radius-md);
+        }
+
+        .flow-step {
+            padding: 18px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.018));
+            border: 1px solid var(--line);
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .flow-step small,
+        .flow-step span,
+        .flow-trigger {
+            color: var(--body);
+        }
+
+        .flow-step strong {
+            font-size: 1rem;
+            color: var(--lavender);
+        }
+
+        .flow-arrow {
+            font-size: 1.8rem;
+            color: var(--violet);
+            background: rgba(192, 132, 252, 0.08);
+            border: 1px dashed rgba(192, 132, 252, 0.2);
+        }
+
+        .flow-trigger {
+            margin-top: 18px;
+            padding: 18px 20px;
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.12), rgba(249, 168, 212, 0.08));
+            border: 1px solid rgba(192, 132, 252, 0.22);
+        }
+
+        .flow-trigger strong {
+            color: var(--lavender);
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .info-card {
+            padding: 24px;
+            border-radius: var(--radius-md);
+            background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+            border: 1px solid var(--line);
+        }
+
+        .info-card ul {
+            margin-top: 12px;
+            padding-left: 18px;
+            color: var(--body);
+        }
+
+        .info-card li + li {
+            margin-top: 8px;
+        }
+
+        .code-grid {
+            display: grid;
+            gap: 18px;
+        }
+
+        .code-grid.two-col {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .code-frame {
+            overflow: hidden;
+        }
+
+        .frame-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 14px 18px;
+            border-bottom: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .frame-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .frame-dots span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .frame-dots span:nth-child(1) { background: #f472b6; }
+        .frame-dots span:nth-child(2) { background: #c084fc; }
+        .frame-dots span:nth-child(3) { background: #ddd6fe; }
+
+        .frame-meta {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .frame-title {
+            font-weight: 700;
+        }
+
+        .frame-lang {
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 0.78rem;
+            color: var(--lavender);
+            padding: 5px 8px;
+            border-radius: 999px;
+            background: rgba(192, 132, 252, 0.12);
+        }
+
+        pre {
+            margin: 0;
+            padding: 20px;
+            overflow-x: auto;
+            color: #f3e8ff;
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 0.88rem;
+            line-height: 1.7;
+            background: linear-gradient(180deg, rgba(18, 9, 31, 0.84), rgba(12, 7, 21, 0.96));
+        }
+
+        code {
+            font-family: inherit;
+        }
+
+        .data-grid,
+        .captures-grid,
+        .structure-grid {
+            display: grid;
+            gap: 18px;
+        }
+
+        .captures-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .data-grid,
+        .structure-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .data-card,
+        .capture-card,
+        .structure-card {
+            overflow: hidden;
+        }
+
+        .capture-card {
+            transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+            position: relative;
+        }
+
+        .capture-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(248, 197, 107, 0.35);
+            box-shadow: 0 18px 42px rgba(10, 4, 20, 0.42), 0 0 0 1px rgba(248, 197, 107, 0.08);
+        }
+
+        .capture-media {
+            position: relative;
+            flex: 1;
+            min-height: 250px;
+            margin: 18px;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: linear-gradient(180deg, rgba(192, 132, 252, 0.08), rgba(249, 168, 212, 0.04));
+            cursor: zoom-in;
+            outline: none;
+        }
+
+        .capture-media:focus-visible {
+            border-color: rgba(248, 197, 107, 0.4);
+            box-shadow: 0 0 0 3px rgba(248, 197, 107, 0.18);
+        }
+
+        .capture-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.45s ease, filter 0.45s ease;
+        }
+
+        .capture-card:hover .capture-media img {
+            transform: scale(1.04);
+            filter: saturate(1.06) contrast(1.02);
+        }
+
+        .capture-media::after {
+            content: "";
+            position: absolute;
+            inset: auto 0 0 0;
+            height: 40%;
+            background: linear-gradient(180deg, transparent, rgba(15, 8, 26, 0.75));
+            pointer-events: none;
+        }
+
+        .capture-media::before {
+            content: "Haz clic para abrir en vista previa";
+            position: absolute;
+            right: 12px;
+            top: 12px;
+            z-index: 2;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(15, 8, 26, 0.8);
+            border: 1px solid rgba(248, 197, 107, 0.32);
+            color: #fff3d6;
+            font-size: 0.74rem;
+            letter-spacing: 0.03em;
+            backdrop-filter: blur(8px);
+            opacity: 0;
+            transform: translateY(-6px);
+            transition: opacity 0.24s ease, transform 0.24s ease;
+            pointer-events: none;
+        }
+
+        .capture-media:hover::before,
+        .capture-media:focus-visible::before {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .capture-badge {
+            position: absolute;
+            left: 14px;
+            bottom: 14px;
+            z-index: 1;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(15, 8, 26, 0.72);
+            border: 1px solid rgba(248, 197, 107, 0.22);
+            color: #fff3d6;
+            font-size: 0.76rem;
+            letter-spacing: 0.04em;
+            backdrop-filter: blur(10px);
+        }
+        .card-head {
+            padding: 16px 18px;
+            border-bottom: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.045);
+        }
+
+        .card-body {
+            padding: 18px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 14px;
+            font-size: 0.95rem;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 12px 10px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        th {
+            color: var(--pink);
+            font-weight: 700;
+            background: rgba(249, 168, 212, 0.06);
+        }
+
+        td {
+            color: var(--body);
+        }
+
+        .terminal {
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 0.9rem;
+            color: #eadcff;
+            white-space: pre-wrap;
+        }
+
+        .capture-card {
+            min-height: 220px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .capture-placeholder {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            text-align: center;
+            padding: 24px;
+            color: var(--body);
+            background: linear-gradient(180deg, rgba(192, 132, 252, 0.08), rgba(249, 168, 212, 0.04));
+            border: 1px dashed rgba(192, 132, 252, 0.3);
+            border-radius: inherit;
+        }
+
+        .captures-hint {
+            margin-bottom: 18px;
+            padding: 12px 14px;
+            border-radius: 12px;
+            border: 1px solid rgba(248, 197, 107, 0.28);
+            background: linear-gradient(90deg, rgba(248, 197, 107, 0.12), rgba(248, 197, 107, 0.04));
+            color: #fff0cc;
+            font-size: 0.92rem;
+        }
+
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(6, 2, 14, 0.82);
+            backdrop-filter: blur(10px);
+            display: grid;
+            place-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.22s ease;
+            z-index: 2000;
+            padding: 20px;
+        }
+
+        .lightbox.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .lightbox-dialog {
+            position: relative;
+            width: min(1100px, 96vw);
+            max-height: 92vh;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(248, 197, 107, 0.32);
+            box-shadow: 0 24px 80px rgba(3, 1, 8, 0.6);
+            background: rgba(12, 6, 22, 0.92);
+        }
+
+        .lightbox-image {
+            width: 100%;
+            max-height: 84vh;
+            object-fit: contain;
+            display: block;
+            background: #0f081a;
+        }
+
+        .lightbox-caption {
+            padding: 10px 14px;
+            color: #e9dbff;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid rgba(248, 197, 107, 0.4);
+            background: rgba(15, 8, 26, 0.72);
+            color: #fff3d6;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        body.no-scroll {
+            overflow: hidden;
+        }
+
+        .note {
+            margin-top: 18px;
+            padding: 16px 18px;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(249, 168, 212, 0.24);
+            background: rgba(249, 168, 212, 0.09);
+            color: #ffe3f3;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 980px) {
+            .hero-grid,
+            .two-col,
+            .code-grid.two-col,
+            .data-grid,
+            .structure-grid,
+            .captures-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .flow-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .flow-arrow {
+                min-height: 64px;
+                transform: rotate(90deg);
+            }
+        }
+
+        @media (max-width: 720px) {
+            .page {
+                width: min(100% - 20px, 100%);
+                padding-top: 20px;
+            }
+
+            .hero,
+            .section {
+                padding: 22px;
+            }
+
+            .section-head {
+                align-items: start;
+                flex-direction: column;
+            }
+
+            .hero h1 {
+                line-height: 1.02;
+            }
+
+            pre {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <a class="back-link" href="./portfolio.html">&larr; Volver al portafolio</a>
+
+        <section class="hero reveal">
+            <div class="eyebrow">Tarea 6 · AWS Lambda</div>
+            <h1>Pipeline de limpieza <span>serverless</span> con Lambda, S3 y EventBridge</h1>
+            <p class="hero-copy">
+                Esta pagina presenta un pipeline compuesto por dos funciones Lambda que leen un CSV desde S3,
+                limpian el dataset y generan un reporte JSON con el conteo final de filas.
+            </p>
+
+            <div class="hero-grid">
+                <article class="hero-card">
+                    <h2>Stack del flujo</h2>
+                    <p>Arquitectura simple, automatizada y sin servidores permanentes.</p>
+                    <div class="stack">
+                        <span class="chip">AWS Lambda</span>
+                        <span class="chip">Amazon S3</span>
+                        <span class="chip">Amazon EventBridge</span>
+                        <span class="chip">Python</span>
+                        <span class="chip">pandas</span>
+                        <span class="chip">boto3</span>
+                    </div>
+                </article>
+
+                <div class="metric-list">
+                    <article class="metric">
+                        <strong>2</strong>
+                        <p>Funciones Lambda encadenadas por el flujo del pipeline.</p>
+                    </article>
+                    <article class="metric">
+                        <strong>5 min</strong>
+                        <p>Frecuencia de ejecucion programada con EventBridge.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section reveal">
+            <div class="section-head">
+                <div>
+                    <div class="section-label">Flujo del pipeline</div>
+                    <h2>De CSV crudo a reporte JSON</h2>
+                </div>
+                <p>El proceso corre de forma automatica y deja el bucket organizado por etapas.</p>
+            </div>
+
+            <div class="flow-grid">
+                <article class="flow-step">
+                    <small>Input · S3 bucket</small>
+                    <strong>alumnos_escuela.csv</strong>
+                    <span>Archivo original en la raiz del bucket.</span>
+                </article>
+                <div class="flow-arrow">&rarr;</div>
+                <article class="flow-step">
+                    <small>Lambda 1</small>
+                    <strong>Limpieza + dataset_utils.py</strong>
+                    <span>Elimina nulos y duplicados del DataFrame.</span>
+                </article>
+                <div class="flow-arrow">&rarr;</div>
+                <article class="flow-step">
+                    <small>Output + reporte</small>
+                    <strong>CSV limpio + JSON final</strong>
+                    <span>clean_data/ y result/ dentro del mismo bucket.</span>
+                </article>
+            </div>
+
+            <div class="flow-trigger">
+                <strong>Trigger programado:</strong> ambas Lambdas usan Amazon EventBridge con la expresion
+                <strong>rate(5 minutes)</strong>. Lambda 1 toma el CSV base, genera el archivo limpio en clean_data/
+                y despues Lambda 2 consume ese resultado para producir el JSON en result/.
+            </div>
+        </section>
+
+        <section class="section reveal">
+            <div class="section-head">
+                <div>
+                    <div class="section-label">Arquitectura funcional</div>
+                    <h2>Rol de cada componente</h2>
+                </div>
+                <p>Separar limpieza y reporte mantiene el flujo claro y reusable.</p>
+            </div>
+
+            <div class="two-col">
+                <article class="info-card">
+                    <h3>Lambda 1 · Limpieza del dataset</h3>
+                    <p>
+                        Lee alumnos_escuela.csv desde S3, delega la transformacion al modulo auxiliar
+                        dataset_utils.py y escribe el resultado limpio en clean_data/.
+                    </p>
+                    <ul>
+                        <li>Obtiene el bucket desde la variable de entorno BUCKET_NAME.</li>
+                        <li>Convierte el contenido a DataFrame con pandas.</li>
+                        <li>Guarda el CSV procesado sin indice.</li>
+                    </ul>
+                </article>
+
+                <article class="info-card">
+                    <h3>Lambda 2 · Conteo y reporte JSON</h3>
+                    <p>
+                        Lee el CSV limpio desde clean_data/, cuenta sus filas y genera un archivo JSON en result/
+                        con el nombre procesado y el total encontrado.
+                    </p>
+                    <ul>
+                        <li>Soporta eventos de S3 o fallback para prueba manual.</li>
+                        <li>Arma el nombre del resultado con os.path.basename.</li>
+                        <li>Publica el archivo con ContentType application/json.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section class="section reveal">
+            <div class="section-head">
+                <div>
+                    <div class="section-label">Codigo</div>
+                </div>
+         
+            </div>
+
+            <div class="code-grid">
+                <article class="code-frame">
+                    <div class="frame-top">
+                        <div class="frame-dots"><span></span><span></span><span></span></div>
+                        <div class="frame-meta">
+                            <span class="frame-title">lambda1.py</span>
+                            <span class="frame-lang">Python · AWS Lambda</span>
+                        </div>
+                    </div>
+                    <pre><code>import json
+import boto3
+import pandas as pd
+import io
+import os
+from dataset_utils import clean_dataset
+
+
+
+s3=boto3.client("s3")
+def lambda_handler(event, context):
+    # TODO implement
+    bucket=os.getenv("BUCKET_NAME")
+    key="prueba_01_alumnos.csv"
+    response= s3.get_object(Bucket=bucket, Key=key)
+    contenido= response["Body"].read().decode("utf-8")
+
+    df= pd.read_csv(io.StringIO(contenido))
+    df = clean_dataset(df)
+
+# 3. Convertir el DF procesado a CSV en memoria
+    csv_buffer = io.StringIO()
+    df.to_csv(csv_buffer, index=False)
+    
+    # 4. Guardar en la nueva ruta: clean_data/clean.csv
+    target_key = "clean_data/clean.csv"
+    s3.put_object(
+        Bucket=bucket,
+        Key=target_key,
+        Body=csv_buffer.getvalue()
+    )
+    return {
+
+        'statusCode': 200,
+        'body': json.dumps(f"Archivo guardado exitosamente en {target_key}")
+    }
+</code></pre>
+                </article>
+
+                <div class="code-grid two-col">
+                    <article class="code-frame">
+                        <div class="frame-top">
+                            <div class="frame-dots"><span></span><span></span><span></span></div>
+                            <div class="frame-meta">
+                                <span class="frame-title">dataset_utils.py</span>
+                                <span class="frame-lang">Python · pandas</span>
+                            </div>
+                        </div>
+                        <pre><code>import pandas as pd
+
+def clean_dataset(df):
+    df = df.dropna()
+    df = df.drop_duplicates()
+    return df</code></pre>
+                    </article>
+
+                    <article class="code-frame">
+                        <div class="frame-top">
+                            <div class="frame-dots"><span></span><span></span><span></span></div>
+                            <div class="frame-meta">
+                                <span class="frame-title">lambda2.py</span>
+                                <span class="frame-lang">Python · AWS Lambda</span>
+                            </div>
+                        </div>
+                        <pre><code>import json
+import boto3
+import urllib.parse
+
+s3 = boto3.client("s3")
+def lambda_handler(event, context):
+    # 1. Obtener información del evento de S3 y decodificar la ruta
+    bucket = event['Records'][0]['s3']['bucket']['name']
+    key = urllib.parse.unquote_plus(event['Records'][0]['s3']['object']['key'])
+    
+    # 2. Solo procesar si es el archivo que nos interesa
+    if key == "clean_data/clean.csv":
+        print(f"Procesando archivo: {key}")
+        
+        # Leer el archivo CSV
+        response = s3.get_object(Bucket=bucket, Key=key)
+        lineas = response["Body"].read().decode("utf-8").splitlines()
+        
+        # Calcular el total (restando encabezado)
+        total_alumnos = len(lineas) - 1 if len(lineas) > 0 else 0
+        
+        # Crear el diccionario de resultados
+        resultado = {
+            "archivo_origen": key,
+            "total_alumnos": total_alumnos,
+            "estado": "procesado"
+        }
+        
+        # 3. Guardar el JSON en la carpeta 'result/' con el nombre 'result.json'
+        target_key = "result/result.json"
+        
+        s3.put_object(
+            Bucket=bucket,
+            Key=target_key,
+            Body=json.dumps(resultado),
+            ContentType='application/json'
+        )
+        
+        print(f"Resultado guardado en {target_key}: {resultado}")
+        
+        return {
+            'statusCode': 200,
+            'body': json.dumps(f"Conteo guardado exitosamente en {target_key}")
+        }
+    
+    return {
+        'statusCode': 200, 
+        'body': json.dumps(f"Archivo {key} ignorado")
+    }</code></pre>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section reveal">
+            <div class="section-head">
+                <div>
+                    <div class="section-label">Dataset</div>
+                    <h2>Input y output de la limpieza</h2>
+                </div>
+                <p>La fila con promedio nulo desaparece durante la transformacion.</p>
+            </div>
+
+            <div class="data-grid">
+                <article class="data-card">
+                    <div class="card-head">
+                        <h3>Input · alumnos_escuela.csv</h3>
+                        <p>4 filas · 3 columnas · S3 en la raiz del bucket</p>
+                    </div>
+                    <div class="card-body">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>alumno</th>
+                                    <th>promedio</th>
+                                    <th>asistencia</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Ana</td><td>9.5</td><td>96</td></tr>
+                                <tr><td>Luis</td><td>8.2</td><td>88</td></tr>
+                                <tr><td>Carla</td><td>null</td><td>91</td></tr>
+                                <tr><td>Mateo</td><td>9.0</td><td>94</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+                <article class="data-card">
+                    <div class="card-head">
+                        <h3>Output · alumnos_escuela_clean.csv</h3>
+                        <p>3 filas · 3 columnas · S3 en clean_data/</p>
+                    </div>
+                    <div class="card-body">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>alumno</th>
+                                    <th>promedio</th>
+                                    <th>asistencia</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Ana</td><td>9.5</td><td>96</td></tr>
+                                <tr><td>Luis</td><td>8.2</td><td>88</td></tr>
+                                <tr><td>Mateo</td><td>9.0</td><td>94</td></tr>
+                            </tbody>
+                        </table>
+                        <div class="note">La fila de Carla fue eliminada porque el valor de promedio era null.</div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="section reveal">
+            <div class="section-head">
+                <div>
+                    <div class="section-label">Salida final</div>
+                    <h2>Reporte JSON y estructura en S3</h2>
+                </div>
+                <p>El bucket termina separado por origen, archivo limpio y resultado.</p>
+            </div>
+
+            <div class="structure-grid">
+                <article class="structure-card">
+                    <div class="card-head">
+                        <h3>result/alumnos_escuela_clean_count.json</h3>
+                        <p>Archivo generado por la Lambda 2</p>
+                    </div>
+                    <pre><code>{
+  "archivo": "clean_data/alumnos_escuela_clean.csv",
+  "total_filas": 3
+}</code></pre>
+                </article>
+
+                <article class="structure-card">
+                    <div class="card-head">
+                        <h3>Estructura generada en S3</h3>
+                        <p>Directorios creados automaticamente durante la ejecucion</p>
+                    </div>
+                    <div class="card-body terminal">s3://&lt;BUCKET_NAME&gt;/
+|-- alumnos_escuela.csv
+|-- clean_data/
+|   `-- alumnos_escuela_clean.csv
+`-- result/
+    `-- alumnos_escuela_clean_count.json</div>
+                </article>
+            </div>
+        </section>
+
+        <section class="section reveal">
+            <div class="section-head">
+                <div>
+                    <div class="section-label">Capturas</div>
+                    <h2>Galeria de evidencias del pipeline</h2>
+                </div>
+                <p>Capturas de configuracion, codigo y resultados de ejecucion.</p>
+            </div>
+
+            <p class="captures-hint">Tip: haz clic sobre los banners de cada imagen para verla en vista previa ampliada.</p>
+
+            <div class="captures-grid">
+                <article class="capture-card">
+                    <div class="card-head">
+                        <h3>Lambda 1</h3>
+                        <p>Configuracion y ejecucion</p>
+                    </div>
+                    <div class="capture-media">
+                        <img src="./lambda1.png" alt="Configuracion y ejecucion de Lambda 1" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid'; this.parentElement.querySelector('.capture-badge').style.display='none';">
+                        <div class="capture-placeholder" style="display:none;">
+                            Agrega aqui la imagen de Lambda 1.
+                            <br>
+                            Sugerencia de nombre: lambda1.png
+                        </div>
+                        <span class="capture-badge">lambda1.png</span>
+                    </div>
+                </article>
+
+                <article class="capture-card">
+                    <div class="card-head">
+                        <h3>Lambda 2</h3>
+                        <p>Configuracion y ejecucion</p>
+                    </div>
+                    <div class="capture-media">
+                        <img src="./lambda2.png" alt="Configuracion y ejecucion de Lambda 2" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid'; this.parentElement.querySelector('.capture-badge').style.display='none';">
+                        <div class="capture-placeholder" style="display:none;">
+                            Agrega aqui la imagen de Lambda 2.
+                            <br>
+                            Sugerencia de nombre: lambda2.png
+                        </div>
+                        <span class="capture-badge">lambda2.png</span>
+                    </div>
+                </article>
+
+                <article class="capture-card">
+                    <div class="card-head">
+                        <h3>Resultado final en S3</h3>
+                        <p>Carpetas clean_data/ y result/ generadas en el bucket</p>
+                    </div>
+                    <div class="capture-media">
+                        <img src="./resultado_tarea6.png" alt="Resultado final del pipeline en S3" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid'; this.parentElement.querySelector('.capture-badge').style.display='none';">
+                        <div class="capture-placeholder" style="display:none;">
+                            Agrega aqui la captura del bucket.
+                            <br>
+                            Sugerencia de nombre: resultado_tarea6.png
+                        </div>
+                        <span class="capture-badge">resultado_tarea6.png</span>
+                    </div>
+                </article>
+
+                <article class="capture-card">
+                    <div class="card-head">
+                        <h3>Codigo de Lambda 1</h3>
+                        <p>Vista del script principal de limpieza</p>
+                    </div>
+                    <div class="capture-media">
+                        <img src="./codigo_lambda1.png" alt="Codigo de Lambda 1" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid'; this.parentElement.querySelector('.capture-badge').style.display='none';">
+                        <div class="capture-placeholder" style="display:grid;">
+                           
+                            
+                        </div>
+                        <span class="capture-badge" style="display:none;">codigo_lambda1.png</span>
+                    </div>
+                </article>
+
+                <article class="capture-card">
+                    <div class="card-head">
+                        <h3>Codigo de dataset_utils</h3>
+                        <p>Funcion auxiliar de limpieza del DataFrame</p>
+                    </div>
+                    <div class="capture-media">
+                        <img src="./codigo_dataset_utils.png" alt="Codigo de dataset_utils" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid'; this.parentElement.querySelector('.capture-badge').style.display='none';">
+                        <div class="capture-placeholder" style="display:grid;">
+                            
+                            
+                        </div>
+                        <span class="capture-badge" style="display:none;">codigo_dataset_utils.png</span>
+                    </div>
+                </article>
+
+                <article class="capture-card">
+                    <div class="card-head">
+                        <h3>Codigo de Lambda 2</h3>
+                        <p>Script que calcula el conteo y genera el JSON</p>
+                    </div>
+                    <div class="capture-media">
+                        <img src="./codigo_lambda2.png" alt="Codigo de Lambda 2" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid'; this.parentElement.querySelector('.capture-badge').style.display='none';">
+                        <div class="capture-placeholder" style="display:grid;">
+                            
+                           
+                        </div>
+                        <span class="capture-badge" style="display:none;">codigo_lambda2.png</span>
+                    </div>
+                </article>
+
+
+                <article class="capture-card">
+                    <div class="card-head">
+                        <h3>Resultado de Lambda 1</h3>
+                        <p>Salida o evidencia del archivo limpio generado</p>
+                    </div>
+                    <div class="capture-media">
+                        <img src="./resultado_lambda1.png" alt="Resultado de Lambda 1" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid'; this.parentElement.querySelector('.capture-badge').style.display='none';">
+                        <div class="capture-placeholder" style="display:grid;">
+                            
+                            
+                        </div>
+                        <span class="capture-badge" style="display:none;">resultado_lambda1.png</span>
+                    </div>
+                </article>
+
+                <article class="capture-card">
+                    <div class="card-head">
+                        <h3>Resultado de Lambda 2</h3>
+                        <p>Salida o evidencia del JSON generado</p>
+                    </div>
+                    <div class="capture-media">
+                        <img src="./resultado_lambda2.png" alt="Resultado de Lambda 2" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid'; this.parentElement.querySelector('.capture-badge').style.display='none';">
+                        <div class="capture-placeholder" style="display:grid;">
+                            
+                        </div>
+                        <span class="capture-badge" style="display:none;">resultado_lambda2.png</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <div id="capture-lightbox" class="lightbox" aria-hidden="true">
+            <div class="lightbox-dialog" role="dialog" aria-modal="true" aria-label="Vista previa de captura">
+                <button id="lightbox-close" class="lightbox-close" aria-label="Cerrar vista previa">&times;</button>
+                <img id="lightbox-image" class="lightbox-image" src="" alt="Vista previa ampliada">
+                <p id="lightbox-caption" class="lightbox-caption"></p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                }
+            });
+        }, { threshold: 0.14 });
+
+        document.querySelectorAll(".reveal").forEach((element) => {
+            observer.observe(element);
+        });
+
+        const lightbox = document.getElementById("capture-lightbox");
+        const lightboxImage = document.getElementById("lightbox-image");
+        const lightboxCaption = document.getElementById("lightbox-caption");
+        const lightboxClose = document.getElementById("lightbox-close");
+
+        const openPreview = (img) => {
+            lightboxImage.src = img.src;
+            lightboxImage.alt = img.alt || "Vista previa ampliada";
+            lightboxCaption.textContent = img.alt || "Captura";
+            lightbox.classList.add("open");
+            lightbox.setAttribute("aria-hidden", "false");
+            document.body.classList.add("no-scroll");
+        };
+
+        const closePreview = () => {
+            lightbox.classList.remove("open");
+            lightbox.setAttribute("aria-hidden", "true");
+            lightboxImage.src = "";
+            lightboxCaption.textContent = "";
+            document.body.classList.remove("no-scroll");
+        };
+
+        document.querySelectorAll(".capture-media").forEach((media) => {
+            media.setAttribute("tabindex", "0");
+            media.setAttribute("role", "button");
+            media.setAttribute("aria-label", "Abrir imagen en vista previa");
+
+            const openIfAvailable = () => {
+                const img = media.querySelector("img");
+                if (!img) return;
+                if (window.getComputedStyle(img).display === "none") return;
+                openPreview(img);
+            };
+
+            media.addEventListener("click", openIfAvailable);
+            media.addEventListener("keydown", (event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    openIfAvailable();
+                }
+            });
+        });
+
+        lightboxClose.addEventListener("click", closePreview);
+        lightbox.addEventListener("click", (event) => {
+            if (event.target === lightbox) {
+                closePreview();
+            }
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && lightbox.classList.contains("open")) {
+                closePreview();
+            }
+        });
+    </script>
+</body>
+</html>

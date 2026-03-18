@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Untitled1</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>Netflix_con_spark</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7796,40 +7796,54 @@ a.anchor-link {
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 <main>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=dace94cb-6718-435a-979f-d0532c1c7327">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2ee23247-bb4e-42ad-be94-6e5b70e4f183">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Titulo-1">Titulo 1<a class="anchor-link" href="#Titulo-1">¶</a></h3>
+<h2 id="NETFLIX-CON-SPARK">NETFLIX CON SPARK<a class="anchor-link" href="#NETFLIX-CON-SPARK">¶</a></h2>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=430c3ba5-5b9a-4672-acf2-57fe6deb690a">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7874ea18-21ef-42cf-8900-dc933636389a">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<ol>
-<li>A</li>
-<li>B</li>
-<li>C</li>
-</ol>
+<h3 id="Importamos-las-bibliotecas">Importamos las bibliotecas<a class="anchor-link" href="#Importamos-las-bibliotecas">¶</a></h3>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=f0425c15-2a64-458d-9159-e86c7dadb786">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8d01facc-ce21-459f-96be-5f30d0b95abe">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"Hola Mundo"</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkSession</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">col</span><span class="p">,</span> <span class="n">corr</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">regexp_extract</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">kagglehub</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=b145cb2d-059b-4191-babf-6c364b3e5925">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">kagglehub</span><span class="o">.</span><span class="n">dataset_download</span><span class="p">(</span><span class="s2">"shivamb/netflix-shows"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Path to dataset files:"</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -7842,92 +7856,34 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Hola Mundo
+<pre>Downloading to /home/ubuntu/.cache/kagglehub/datasets/shivamb/netflix-shows/5.archive...
 </pre>
 </div>
 </div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1.34M/1.34M [00:00&lt;00:00, 56.4MB/s]</pre>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=abb14370-0421-4fe8-a042-2110c851709e">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">var1</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">var2</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">res</span> <span class="o">=</span> <span class="nb">print</span><span class="p">(</span><span class="n">var1</span> <span class="o">+</span> <span class="n">var2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>3
+<pre>Extracting files...
+Path to dataset files: /home/ubuntu/.cache/kagglehub/datasets/shivamb/netflix-shows/versions/5
 </pre>
 </div>
 </div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=f252fcc1-4e55-4117-9889-199ea28fb724">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">var1</span> <span class="o">=</span> <span class="s1">'hola'</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">var1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>hola
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>
 </pre>
 </div>
 </div>
 </div>
 </div>
-</div>Podemos usar RAW para que se vea el codigo pero no ejecutará nada. Podría ser considerado como un tipo comentario. Tarea jugar codecombat hasta finalizar la prueba gratuita (12 niveles) tomar captura del mapa y subirla al repo del portafolio.
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=10b6e08f-7cfa-401a-bc12-c463b3843322">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="IDEA">IDEA<a class="anchor-link" href="#IDEA">¶</a></h3><ul>
-<li>Intención: ¿Qué quiero lograr?</li>
-<li>Datos: Input y Output -- ejemplo: entrada csv, pdf, etc | salida: reportes, imagenes, valores limpios.</li>
-<li>Estrategia: ¿Qué pasos voy a seguir? 1. Recibir el archivo, 2. procesar el archivo, 3. Limpiar el archivo, 4. etc. Datos estructurados (tablas, separados por ",")</li>
-<li>Aplicación: ¿Cómo se escribe en *python(pyspark, o java, otros)? - Cómo lo voy a aterrizar ?</li>
-</ul>
-<h2 id="Guardar-informacion-en-variables">Guardar informacion en variables<a class="anchor-link" href="#Guardar-informacion-en-variables">¶</a></h2><ul>
-<li>I: Guardar nombres y edades</li>
-<li>D: De quién? R= Del curso de AWS de Benjamin</li>
-<li>E: Usar variables para guardar estos datos</li>
-<li>A: Con qué? con python</li>
-</ul>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=d1781767-8847-4065-821e-8fad9c378359">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=b54e1fde-9825-4a31-8781-a8eca53b5553">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7935,11 +7891,8 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">nombre</span> <span class="o">=</span> <span class="s2">"Dante"</span>
-<span class="n">edad</span> <span class="o">=</span> <span class="mi">30</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">nombre</span><span class="p">,</span> <span class="n">edad</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">nombre</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">edad</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">archivos</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">archivos</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -7952,26 +7905,13 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Dante 30
-Dante
-30
+<pre>['netflix_titles.csv']
 </pre>
 </div>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b62930bc-8365-4caa-b46e-6a54e37ee8c2">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Tipos-de-dato">Tipos de dato<a class="anchor-link" href="#Tipos-de-dato">¶</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=27d84d9e-1777-4c09-b11e-b4ac2348eb70">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f9ef65e9-9c16-40d0-9b0f-9a8d94066835">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7979,68 +7919,16 @@ Dante
 <div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">texto</span> <span class="o">=</span> <span class="s2">"hola"</span>
-<span class="n">entero</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">decimalFlotante</span> <span class="o">=</span> <span class="mf">10.0</span>
-<span class="n">boolean</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="c1"># Para saber el tipo de dato que estamos usando: </span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">texto</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">entero</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">decimalFlotante</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">boolean</span><span class="p">))</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span> \
+    <span class="o">.</span><span class="n">master</span><span class="p">(</span><span class="s2">"local[*]"</span><span class="p">)</span> \
+    <span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">"Netflix"</span><span class="p">)</span> \
+    <span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>&lt;class 'str'&gt;
-&lt;class 'int'&gt;
-&lt;class 'float'&gt;
-&lt;class 'bool'&gt;
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=122b6c16-b9d2-491b-ae70-d62750ba0378">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Operaciones </span>
-<span class="n">venta1</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="n">venta2</span> <span class="o">=</span> <span class="mi">230</span>
-<span class="c1"># Se puede sumar: </span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Sumas: "</span> <span class="p">,</span> <span class="n">venta1</span> <span class="o">+</span> <span class="n">venta2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Sumas:  330
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=115d519b-9240-4423-851b-7700c745256d">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=0ea2bc64-e11a-4a5c-bcc7-45fd93564384">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8048,11 +7936,15 @@ Dante
 <div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Listas</span>
-<span class="n">ventas</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"toda la lista"</span><span class="p">,</span> <span class="n">ventas</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="s2">"Solo el primero"</span><span class="p">,</span> <span class="n">ventas</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="nb">print</span> <span class="p">(</span><span class="s2">"Solo el ultimo"</span><span class="p">,</span> <span class="n">ventas</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">"netflix_titles.csv"</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span>
+    <span class="n">file_path</span><span class="p">,</span>
+    <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">inferSchema</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">truncate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8065,15 +7957,28 @@ Dante
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>toda la lista [1, 2, 3, 4, 5]
-Solo el primero 1
-Solo el ultimo 5
+<pre>+-------+-------+--------------------------------+-----------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------+------------------+------------+------+---------+-------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+|show_id|type   |title                           |director                     |cast                                                                                                                                                                                                                                                                                                           |country                                                              |date_added        |release_year|rating|duration |listed_in                                                    |description                                                                                                                                              |
++-------+-------+--------------------------------+-----------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------+------------------+------------+------+---------+-------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+|s1     |Movie  |Dick Johnson Is Dead            |Kirsten Johnson              |NULL                                                                                                                                                                                                                                                                                                           |United States                                                        |September 25, 2021|2020        |PG-13 |90 min   |Documentaries                                                |As her father nears the end of his life, filmmaker Kirsten Johnson stages his death in inventive and comical ways to help them both face the inevitable. |
+|s2     |TV Show|Blood &amp; Water                   |NULL                         |Ama Qamata, Khosi Ngema, Gail Mabalane, Thabang Molaba, Dillon Windvogel, Natasha Thahane, Arno Greeff, Xolile Tshabalala, Getmore Sithole, Cindy Mahlangu, Ryle De Morny, Greteli Fincham, Sello Maake Ka-Ncube, Odwa Gwanya, Mekaila Mathys, Sandi Schultz, Duane Williams, Shamilla Miller, Patrick Mofokeng|South Africa                                                         |September 24, 2021|2021        |TV-MA |2 Seasons|International TV Shows, TV Dramas, TV Mysteries              |After crossing paths at a party, a Cape Town teen sets out to prove whether a private-school swimming star is her sister who was abducted at birth.      |
+|s3     |TV Show|Ganglands                       |Julien Leclercq              |Sami Bouajila, Tracy Gotoas, Samuel Jouy, Nabiha Akkari, Sofia Lesaffre, Salim Kechiouche, Noureddine Farihi, Geert Van Rampelberg, Bakary Diombera                                                                                                                                                            |NULL                                                                 |September 24, 2021|2021        |TV-MA |1 Season |Crime TV Shows, International TV Shows, TV Action &amp; Adventure|To protect his family from a powerful drug lord, skilled thief Mehdi and his expert team of robbers are pulled into a violent and deadly turf war.       |
+|s4     |TV Show|Jailbirds New Orleans           |NULL                         |NULL                                                                                                                                                                                                                                                                                                           |NULL                                                                 |September 24, 2021|2021        |TV-MA |1 Season |Docuseries, Reality TV                                       |Feuds, flirtations and toilet talk go down among the incarcerated women at the Orleans Justice Center in New Orleans on this gritty reality series.      |
+|s5     |TV Show|Kota Factory                    |NULL                         |Mayur More, Jitendra Kumar, Ranjan Raj, Alam Khan, Ahsaas Channa, Revathi Pillai, Urvi Singh, Arun Kumar                                                                                                                                                                                                       |India                                                                |September 24, 2021|2021        |TV-MA |2 Seasons|International TV Shows, Romantic TV Shows, TV Comedies       |In a city of coaching centers known to train India’s finest collegiate minds, an earnest but unexceptional student and his friends navigate campus life. |
+|s6     |TV Show|Midnight Mass                   |Mike Flanagan                |Kate Siegel, Zach Gilford, Hamish Linklater, Henry Thomas, Kristin Lehman, Samantha Sloyan, Igby Rigney, Rahul Kohli, Annarah Cymone, Annabeth Gish, Alex Essoe, Rahul Abburi, Matt Biedel, Michael Trucco, Crystal Balint, Louis Oliver                                                                       |NULL                                                                 |September 24, 2021|2021        |TV-MA |1 Season |TV Dramas, TV Horror, TV Mysteries                           |The arrival of a charismatic young priest brings glorious miracles, ominous mysteries and renewed religious fervor to a dying town desperate to believe. |
+|s7     |Movie  |My Little Pony: A New Generation|Robert Cullen, José Luis Ucha|Vanessa Hudgens, Kimiko Glenn, James Marsden, Sofia Carson, Liza Koshy, Ken Jeong, Elizabeth Perkins, Jane Krakowski, Michael McKean, Phil LaMarr                                                                                                                                                              |NULL                                                                 |September 24, 2021|2021        |PG    |91 min   |Children &amp; Family Movies                                     |Equestria's divided. But a bright-eyed hero believes Earth Ponies, Pegasi and Unicorns should be pals — and, hoof to heart, she’s determined to prove it.|
+|s8     |Movie  |Sankofa                         |Haile Gerima                 |Kofi Ghanaba, Oyafunmike Ogunlano, Alexandra Duah, Nick Medley, Mutabaruka, Afemo Omilami, Reggie Carter, Mzuri                                                                                                                                                                                                |United States, Ghana, Burkina Faso, United Kingdom, Germany, Ethiopia|September 24, 2021|1993        |TV-MA |125 min  |Dramas, Independent Movies, International Movies             |On a photo shoot in Ghana, an American model slips back in time, becomes enslaved on a plantation and bears witness to the agony of her ancestral past.  |
+|s9     |TV Show|The Great British Baking Show   |Andy Devonshire              |Mel Giedroyc, Sue Perkins, Mary Berry, Paul Hollywood                                                                                                                                                                                                                                                          |United Kingdom                                                       |September 24, 2021|2021        |TV-14 |9 Seasons|British TV Shows, Reality TV                                 |A talented batch of amateur bakers face off in a 10-week competition, whipping up their best dishes in the hopes of being named the U.K.'s best.         |
+|s10    |Movie  |The Starling                    |Theodore Melfi               |Melissa McCarthy, Chris O'Dowd, Kevin Kline, Timothy Olyphant, Daveed Diggs, Skyler Gisondo, Laura Harrier, Rosalind Chao, Kimberly Quinn, Loretta Devine, Ravi Kapoor                                                                                                                                         |United States                                                        |September 24, 2021|2021        |PG-13 |104 min  |Comedies, Dramas                                             |A woman adjusting to life after a loss contends with a feisty bird that's taken over her garden — and a husband who's struggling to find a way forward.  |
++-------+-------+--------------------------------+-----------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------+------------------+------------+------+---------+-------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+only showing top 10 rows
+
 </pre>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=ef3b5a7b-c596-4db0-a2b5-754df9a875bb">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=d6eae80c-985d-4e8f-b89d-5f2d923743fc">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8081,12 +7986,7 @@ Solo el ultimo 5
 <div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Condicionales</span>
-<span class="n">venta</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="k">if</span> <span class="n">venta</span> <span class="o">&gt;=</span> <span class="mi">150</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"venta alta"</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span> 
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Venta normal"</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">count</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -8099,27 +7999,13 @@ Solo el ultimo 5
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Venta normal
+<pre>8809
 </pre>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=dd83336d-a43c-4361-82d1-04e04ca077c4">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=185b9a66-17c5-4994-8aad-51e7da10e556">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=126c2bae-07c8-4d1c-846c-87375aa00bf6">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8127,10 +8013,7 @@ Solo el ultimo 5
 <div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Ciclos</span>
-<span class="n">ventas_almacen</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">550</span><span class="p">,</span> <span class="mi">230</span><span class="p">]</span>
-<span class="k">for</span> <span class="n">venta</span> <span class="ow">in</span> <span class="n">ventas_almacen</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Revisión de ventas de almacén: "</span><span class="p">,</span> <span class="n">venta</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -8143,53 +8026,13 @@ Solo el ultimo 5
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Revisión de ventas de almacén:  1100
-Revisión de ventas de almacén:  200
-Revisión de ventas de almacén:  30
-Revisión de ventas de almacén:  550
-Revisión de ventas de almacén:  230
+<pre>12
 </pre>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=346c4775-9c3f-47eb-a365-38885c46c6d2">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># funciones</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">duplicar</span><span class="p">(</span><span class="n">numero</span><span class="p">):</span>
-    <span class="n">resultado</span> <span class="o">=</span> <span class="n">numero</span> <span class="o">*</span> <span class="mi">2</span>
-    <span class="k">return</span> <span class="n">resultado</span>
-
-<span class="nb">print</span> <span class="p">(</span><span class="n">duplicar</span><span class="p">(</span><span class="mi">11</span><span class="p">))</span>
-<span class="nb">print</span> <span class="p">(</span><span class="n">duplicar</span><span class="p">(</span><span class="mi">113</span><span class="p">))</span>
-<span class="nb">print</span> <span class="p">(</span><span class="n">duplicar</span><span class="p">(</span><span class="mi">124</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>22
-226
-248
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=015356a1-ef27-405a-838c-fafa74e45438">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=1a4d4e05-3188-4cf9-8d56-a7ef3223a4fb">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8197,16 +8040,7 @@ Revisión de ventas de almacén:  230
 <div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Diccionarios</span>
-<span class="n">producto</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">"nombre"</span><span class="p">:</span><span class="s2">"laptop"</span><span class="p">,</span>
-    <span class="s2">"precio"</span><span class="p">:</span><span class="mi">3000</span><span class="p">,</span>
-    <span class="s2">"categoria"</span><span class="p">:</span> <span class="s2">"Tecnología"</span>
-<span class="p">}</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">producto</span><span class="p">[</span><span class="s2">"nombre"</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">producto</span><span class="p">[</span><span class="s2">"categoria"</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">producto</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -8219,15 +8053,26 @@ Revisión de ventas de almacén:  230
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>laptop
-Tecnología
-{'nombre': 'laptop', 'precio': 3000, 'categoria': 'Tecnología'}
+<pre>root
+ |-- show_id: string (nullable = true)
+ |-- type: string (nullable = true)
+ |-- title: string (nullable = true)
+ |-- director: string (nullable = true)
+ |-- cast: string (nullable = true)
+ |-- country: string (nullable = true)
+ |-- date_added: string (nullable = true)
+ |-- release_year: string (nullable = true)
+ |-- rating: string (nullable = true)
+ |-- duration: string (nullable = true)
+ |-- listed_in: string (nullable = true)
+ |-- description: string (nullable = true)
+
 </pre>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=b9ec35db-e813-48e8-ae8b-bed3fe7f7b5d">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=a95c45d6-1ebe-4d5c-8fdc-157eb8673cd7">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8235,12 +8080,12 @@ Tecnología
 <div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Ejercicio</span>
-<span class="n">ventas</span> <span class="o">=</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">]</span>
-<span class="n">suma</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">for</span> <span class="n">venta</span> <span class="ow">in</span> <span class="n">ventas</span><span class="p">:</span>
-    <span class="n">suma</span> <span class="o">=</span> <span class="n">suma</span> <span class="o">+</span> <span class="n">venta</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Total en ventas: "</span><span class="p">,</span> <span class="n">suma</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">df_duration</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
+    <span class="s2">"duration_int"</span><span class="p">,</span>
+    <span class="n">regexp_extract</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"duration"</span><span class="p">),</span> <span class="sa">r</span><span class="s2">"(\d+)"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">"int"</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">df_duration</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">"title"</span><span class="p">,</span> <span class="s2">"type"</span><span class="p">,</span> <span class="s2">"release_year"</span><span class="p">,</span> <span class="s2">"duration"</span><span class="p">,</span> <span class="s2">"duration_int"</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">truncate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8253,36 +8098,60 @@ Tecnología
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Total en ventas:  105
+<pre>+--------------------------------+-------+------------+---------+------------+
+|title                           |type   |release_year|duration |duration_int|
++--------------------------------+-------+------------+---------+------------+
+|Dick Johnson Is Dead            |Movie  |2020        |90 min   |90          |
+|Blood &amp; Water                   |TV Show|2021        |2 Seasons|2           |
+|Ganglands                       |TV Show|2021        |1 Season |1           |
+|Jailbirds New Orleans           |TV Show|2021        |1 Season |1           |
+|Kota Factory                    |TV Show|2021        |2 Seasons|2           |
+|Midnight Mass                   |TV Show|2021        |1 Season |1           |
+|My Little Pony: A New Generation|Movie  |2021        |91 min   |91          |
+|Sankofa                         |Movie  |1993        |125 min  |125         |
+|The Great British Baking Show   |TV Show|2021        |9 Seasons|9           |
+|The Starling                    |Movie  |2021        |104 min  |104         |
++--------------------------------+-------+------------+---------+------------+
+only showing top 10 rows
+
 </pre>
 </div>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e317c518-2cbf-4a39-9357-080de9e9a392">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=e186eaf5-ceee-427f-8ef4-d08601566f0b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Resuelve-este-problema-usando-IDEA-antes-de-escribir-c%C3%B3digo:">Resuelve este problema usando IDEA antes de escribir código:<a class="anchor-link" href="#Resuelve-este-problema-usando-IDEA-antes-de-escribir-c%C3%B3digo:">¶</a></h3><h3 id="Problema:-Tienes-estas-ventas:">Problema: Tienes estas ventas:<a class="anchor-link" href="#Problema:-Tienes-estas-ventas:">¶</a></h3><ul>
-<li>[100, 300, 150, 400, 250]</li>
-</ul>
-<h3 id="Necesitas:">Necesitas:<a class="anchor-link" href="#Necesitas:">¶</a></h3><ul>
-<li>calcular el total,</li>
-<li>calcular el promedio,</li>
-<li>imprimir cuáles ventas son altas (&gt;= 250).</li>
-<li>Antes de programar, escribe:</li>
-<li>I: Quiero: Calcular el total de ventas, el promedio de ventas, saber cuales son ventas altas</li>
-<li>D: Input - [100, 300, 150, 400, 250] - Output - Total ventas, promedio ventas, ventas altas: 300, 400, 250</li>
-<li>E: Pasos: 1. Iterar sobre la lista de ventas. 2. Sumar cada ventan en un total. 3. Del totalVentas dividir entre el numero de ventas. 4. implementar condicional para saber si es alta o no.</li>
-<li>A: Voy a utilizar un "for" para iterar, 3 variables extras para saber el total, promedio y ventas altas.</li>
-</ul>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">df_duration</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">corr</span><span class="p">(</span><span class="s2">"release_year"</span><span class="p">,</span> <span class="s2">"duration_int"</span><span class="p">))</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=81fe531f-4254-4327-962c-86b605430d68">
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>+--------------------------------+
+|corr(release_year, duration_int)|
++--------------------------------+
+|             -0.2504450271508247|
++--------------------------------+
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=e3f22677-da22-4ef6-9804-a30d5ac8352b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8290,22 +8159,7 @@ Tecnología
 <div class="jp-InputPrompt jp-InputArea-prompt">In [17]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">ventas</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">250</span><span class="p">]</span>
-<span class="n">totalVentas</span> <span class="o">=</span> <span class="mi">0</span> 
-<span class="k">for</span> <span class="n">venta</span> <span class="ow">in</span> <span class="n">ventas</span><span class="p">:</span>
-    <span class="n">totalVentas</span> <span class="o">=</span> <span class="n">totalVentas</span> <span class="o">+</span> <span class="n">venta</span>
-    <span class="k">if</span> <span class="n">venta</span> <span class="o">&gt;=</span> <span class="mi">250</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Venta alta: $"</span><span class="p">,</span> <span class="n">venta</span><span class="p">)</span>
-<span class="n">promedio</span> <span class="o">=</span> <span class="n">totalVentas</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">ventas</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Total en ventas: $"</span><span class="p">,</span> <span class="n">totalVentas</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Promedio en ventas: $"</span><span class="p">,</span> <span class="n">promedio</span><span class="p">)</span>
-
-<span class="c1">##############################</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"=============================================="</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Version simplificada"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Version simplificada - Total en Ventas: $"</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">ventas</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Version simplificada - Promedio en ventas: $"</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">ventas</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">ventas</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Version simplificada - Ventas altas: "</span><span class="p">,</span> <span class="p">[</span><span class="n">venta</span> <span class="k">for</span> <span class="n">venta</span> <span class="ow">in</span> <span class="n">ventas</span> <span class="k">if</span> <span class="n">venta</span> <span class="o">&gt;=</span> <span class="mi">250</span><span class="p">])</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"release_year"</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2015</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">truncate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8318,16 +8172,84 @@ Tecnología
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Venta alta: $ 300
-Venta alta: $ 400
-Venta alta: $ 250
-Total en ventas: $ 1200
-Promedio en ventas: $ 240.0
-==============================================
-Version simplificada
-Version simplificada - Total en Ventas: $ 1200
-Version simplificada - Promedio en ventas: $ 240.0
-Version simplificada - Ventas altas:  [300, 400, 250]
+<pre>+-------+-------+---------------------------------------------------+---------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------+------------------+------------+------+---------+------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|show_id|type   |title                                              |director                                     |cast                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |country                |date_added        |release_year|rating|duration |listed_in                                                               |description                                                                                                                                                 |
++-------+-------+---------------------------------------------------+---------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------+------------------+------------+------+---------+------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|s1     |Movie  |Dick Johnson Is Dead                               |Kirsten Johnson                              |NULL                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |United States          |September 25, 2021|2020        |PG-13 |90 min   |Documentaries                                                           |As her father nears the end of his life, filmmaker Kirsten Johnson stages his death in inventive and comical ways to help them both face the inevitable.    |
+|s2     |TV Show|Blood &amp; Water                                      |NULL                                         |Ama Qamata, Khosi Ngema, Gail Mabalane, Thabang Molaba, Dillon Windvogel, Natasha Thahane, Arno Greeff, Xolile Tshabalala, Getmore Sithole, Cindy Mahlangu, Ryle De Morny, Greteli Fincham, Sello Maake Ka-Ncube, Odwa Gwanya, Mekaila Mathys, Sandi Schultz, Duane Williams, Shamilla Miller, Patrick Mofokeng                                                                                                                                                                                                                                     |South Africa           |September 24, 2021|2021        |TV-MA |2 Seasons|International TV Shows, TV Dramas, TV Mysteries                         |After crossing paths at a party, a Cape Town teen sets out to prove whether a private-school swimming star is her sister who was abducted at birth.         |
+|s3     |TV Show|Ganglands                                          |Julien Leclercq                              |Sami Bouajila, Tracy Gotoas, Samuel Jouy, Nabiha Akkari, Sofia Lesaffre, Salim Kechiouche, Noureddine Farihi, Geert Van Rampelberg, Bakary Diombera                                                                                                                                                                                                                                                                                                                                                                                                 |NULL                   |September 24, 2021|2021        |TV-MA |1 Season |Crime TV Shows, International TV Shows, TV Action &amp; Adventure           |To protect his family from a powerful drug lord, skilled thief Mehdi and his expert team of robbers are pulled into a violent and deadly turf war.          |
+|s4     |TV Show|Jailbirds New Orleans                              |NULL                                         |NULL                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |NULL                   |September 24, 2021|2021        |TV-MA |1 Season |Docuseries, Reality TV                                                  |Feuds, flirtations and toilet talk go down among the incarcerated women at the Orleans Justice Center in New Orleans on this gritty reality series.         |
+|s5     |TV Show|Kota Factory                                       |NULL                                         |Mayur More, Jitendra Kumar, Ranjan Raj, Alam Khan, Ahsaas Channa, Revathi Pillai, Urvi Singh, Arun Kumar                                                                                                                                                                                                                                                                                                                                                                                                                                            |India                  |September 24, 2021|2021        |TV-MA |2 Seasons|International TV Shows, Romantic TV Shows, TV Comedies                  |In a city of coaching centers known to train India’s finest collegiate minds, an earnest but unexceptional student and his friends navigate campus life.    |
+|s6     |TV Show|Midnight Mass                                      |Mike Flanagan                                |Kate Siegel, Zach Gilford, Hamish Linklater, Henry Thomas, Kristin Lehman, Samantha Sloyan, Igby Rigney, Rahul Kohli, Annarah Cymone, Annabeth Gish, Alex Essoe, Rahul Abburi, Matt Biedel, Michael Trucco, Crystal Balint, Louis Oliver                                                                                                                                                                                                                                                                                                            |NULL                   |September 24, 2021|2021        |TV-MA |1 Season |TV Dramas, TV Horror, TV Mysteries                                      |The arrival of a charismatic young priest brings glorious miracles, ominous mysteries and renewed religious fervor to a dying town desperate to believe.    |
+|s7     |Movie  |My Little Pony: A New Generation                   |Robert Cullen, José Luis Ucha                |Vanessa Hudgens, Kimiko Glenn, James Marsden, Sofia Carson, Liza Koshy, Ken Jeong, Elizabeth Perkins, Jane Krakowski, Michael McKean, Phil LaMarr                                                                                                                                                                                                                                                                                                                                                                                                   |NULL                   |September 24, 2021|2021        |PG    |91 min   |Children &amp; Family Movies                                                |Equestria's divided. But a bright-eyed hero believes Earth Ponies, Pegasi and Unicorns should be pals — and, hoof to heart, she’s determined to prove it.   |
+|s9     |TV Show|The Great British Baking Show                      |Andy Devonshire                              |Mel Giedroyc, Sue Perkins, Mary Berry, Paul Hollywood                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |United Kingdom         |September 24, 2021|2021        |TV-14 |9 Seasons|British TV Shows, Reality TV                                            |A talented batch of amateur bakers face off in a 10-week competition, whipping up their best dishes in the hopes of being named the U.K.'s best.            |
+|s10    |Movie  |The Starling                                       |Theodore Melfi                               |Melissa McCarthy, Chris O'Dowd, Kevin Kline, Timothy Olyphant, Daveed Diggs, Skyler Gisondo, Laura Harrier, Rosalind Chao, Kimberly Quinn, Loretta Devine, Ravi Kapoor                                                                                                                                                                                                                                                                                                                                                                              |United States          |September 24, 2021|2021        |PG-13 |104 min  |Comedies, Dramas                                                        |A woman adjusting to life after a loss contends with a feisty bird that's taken over her garden — and a husband who's struggling to find a way forward.     |
+|s11    |TV Show|Vendetta: Truth, Lies and The Mafia                |NULL                                         |NULL                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |NULL                   |September 24, 2021|2021        |TV-MA |1 Season |Crime TV Shows, Docuseries, International TV Shows                      |"Sicily boasts a bold ""Anti-Mafia"" coalition. But what happens when those trying to bring down organized crime are accused of being criminals themselves?"|
+|s12    |TV Show|Bangkok Breaking                                   |Kongkiat Komesiri                            |Sukollawat Kanarot, Sushar Manaying, Pavarit Mongkolpisit, Sahajak Boonthanakit, Suthipongse Thatphithakkul, Bhasaworn Bawronkirati, Daweerit Chullasapya, Waratthaya Wongchayaporn, Kittiphoom Wongpentak, Abhicha Thanachanun, Nophand Boonyai, Kittipong Khamsat, Arisara Wongchalee, Jaytiya Naiwattanakul, Pantipa Arunwattanachai, Panupan Jantanawong, Kungtap Saelim, Phumphat Chartsuriyakiat, Issara Veranitinunt, Keerati Sivakuae, Panjai Sirisuwan, Supranee Charoenpol, Suda Chuenban, Visaka Banhansupavat, Pitchatorn Santinatornkul|NULL                   |September 23, 2021|2021        |TV-MA |1 Season |Crime TV Shows, International TV Shows, TV Action &amp; Adventure           |Struggling to earn a living in Bangkok, a man joins an emergency rescue service and realizes he must unravel a citywide conspiracy.                         |
+|s13    |Movie  |Je Suis Karl                                       |Christian Schwochow                          |Luna Wedler, Jannis Niewöhner, Milan Peschel, Edin Hasanović, Anna Fialová, Marlon Boess, Victor Boccard, Fleur Geffrier, Aziz Dyab, Mélanie Fouché, Elizaveta Maximová                                                                                                                                                                                                                                                                                                                                                                             |Germany, Czech Republic|September 23, 2021|2021        |TV-MA |127 min  |Dramas, International Movies                                            |After most of her family is murdered in a terrorist bombing, a young woman is unknowingly lured into joining the very group that killed them.               |
+|s14    |Movie  |Confessions of an Invisible Girl                   |Bruno Garotti                                |Klara Castanho, Lucca Picon, Júlia Gomes, Marcus Bessa, Kiria Malheiros, Fernanda Concon, Gabriel Lima, Caio Cabral, Leonardo Cidade, Jade Cardozo                                                                                                                                                                                                                                                                                                                                                                                                  |NULL                   |September 22, 2021|2021        |TV-PG |91 min   |Children &amp; Family Movies, Comedies                                      |When the clever but socially-awkward Tetê joins a new school, she'll do anything to fit in. But the queen bee among her classmates has other ideas.         |
+|s15    |TV Show|Crime Stories: India Detectives                    |NULL                                         |NULL                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |NULL                   |September 22, 2021|2021        |TV-MA |1 Season |British TV Shows, Crime TV Shows, Docuseries                            |Cameras following Bengaluru police on the job offer a rare glimpse into the complex and challenging inner workings of four major crime investigations.      |
+|s16    |TV Show|Dear White People                                  |NULL                                         |Logan Browning, Brandon P. Bell, DeRon Horton, Antoinette Robertson, John Patrick Amedori, Ashley Blaine Featherson, Marque Richardson, Giancarlo Esposito                                                                                                                                                                                                                                                                                                                                                                                          |United States          |September 22, 2021|2021        |TV-MA |4 Seasons|TV Comedies, TV Dramas                                                  |"Students of color navigate the daily slights and slippery politics of life at an Ivy League college that's not nearly as ""post-racial"" as it thinks."    |
+|s17    |Movie  |Europe's Most Dangerous Man: Otto Skorzeny in Spain|Pedro de Echave García, Pablo Azorín Williams|NULL                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |NULL                   |September 22, 2021|2020        |TV-MA |67 min   |Documentaries, International Movies                                     |Declassified documents reveal the post-WWII life of Otto Skorzeny, a close Hitler ally who escaped to Spain and became an adviser to world presidents.      |
+|s18    |TV Show|Falsa identidad                                    |NULL                                         |Luis Ernesto Franco, Camila Sodi, Sergio Goyri, Samadhi Zendejas, Eduardo Yáñez, Sonya Smith, Alejandro Camacho, Azela Robinson, Uriel del Toro, Géraldine Bazán, Gabriela Roel, Marcus Ornellas                                                                                                                                                                                                                                                                                                                                                    |Mexico                 |September 22, 2021|2020        |TV-MA |2 Seasons|Crime TV Shows, Spanish-Language TV Shows, TV Dramas                    |Strangers Diego and Isabel flee their home in Mexico and pretend to be a married couple to escape his drug-dealing enemies and her abusive husband.         |
+|s19    |Movie  |Intrusion                                          |Adam Salky                                   |Freida Pinto, Logan Marshall-Green, Robert John Burke, Megan Elisabeth Kelly, Sarah Minnich, Hayes Hargrove, Mark Sivertsen, Brandon Fierro, Antonio Valles, Clint Obenchain                                                                                                                                                                                                                                                                                                                                                                        |NULL                   |September 22, 2021|2021        |TV-14 |94 min   |Thrillers                                                               |After a deadly home invasion at a couple’s new dream house, the traumatized wife searches for answers — and learns the real danger is just beginning.       |
+|s20    |TV Show|Jaguar                                             |NULL                                         |Blanca Suárez, Iván Marcos, Óscar Casas, Adrián Lastra, Francesc Garrido, Stefan Weinert, Julia Möller, Alicia Chojnowski                                                                                                                                                                                                                                                                                                                                                                                                                           |NULL                   |September 22, 2021|2021        |TV-MA |1 Season |International TV Shows, Spanish-Language TV Shows, TV Action &amp; Adventure|In the 1960s, a Holocaust survivor joins a group of self-trained spies who seek justice against Nazis fleeing to Spain to hide after WWII.                  |
+|s21    |TV Show|Monsters Inside: The 24 Faces of Billy Milligan    |Olivier Megaton                              |NULL                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |NULL                   |September 22, 2021|2021        |TV-14 |1 Season |Crime TV Shows, Docuseries, International TV Shows                      |In the late 1970s, an accused serial rapist claims multiple personalities control his behavior, setting off a legal odyssey that captivates America.        |
++-------+-------+---------------------------------------------------+---------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------+------------------+------------+------+---------+------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+
+only showing top 20 rows
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=a4acf7c7-a805-4c29-ba67-1e5e009faa06">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [18]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"type"</span><span class="p">,</span> <span class="s2">"rating"</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>+-------+--------------------+-----+
+|   type|              rating|count|
++-------+--------------------+-----+
+|  Movie|                TV-G|  126|
+|  Movie|    Shavidee Trotter|    1|
+|  Movie|                TV-Y|  131|
+|  Movie|               TV-Y7|  139|
+|  Movie|              66 min|    1|
+|  Movie|                   G|   41|
+|  Movie|               NC-17|    3|
+|  Movie|               PG-13|  489|
+|   NULL|                NULL|    1|
+|TV Show|               TV-PG|  323|
+|  Movie|            TV-Y7-FV|    5|
+|TV Show|                  NR|    5|
+|  Movie|                   R|  794|
+|TV Show|                NULL|    2|
+|  Movie|                  NR|   75|
+|  Movie|                2021|    2|
+|  Movie|         Jide Kosoko|    1|
+|TV Show| Keppy Ekpenyong ...|    1|
+|TV Show|               TV-Y7|  195|
+|  Movie|                2017|    1|
++-------+--------------------+-----+
+only showing top 20 rows
+
 </pre>
 </div>
 </div>

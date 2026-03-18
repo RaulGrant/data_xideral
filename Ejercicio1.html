@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Untitled1</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>Actividad1ClaseDel13-03</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7796,59 +7796,23 @@ a.anchor-link {
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 <main>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=dace94cb-6718-435a-979f-d0532c1c7327">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=859b5b6b-ebcf-4122-83e3-d2c160ded7d8">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Titulo-1">Titulo 1<a class="anchor-link" href="#Titulo-1">¶</a></h3>
+<h2 id="Ejercicio-2:-limpieza-de-duplicados-y-calidad-de-datos">Ejercicio 2: limpieza de duplicados y calidad de datos<a class="anchor-link" href="#Ejercicio-2:-limpieza-de-duplicados-y-calidad-de-datos">¶</a></h2><h3 id="IDEA">IDEA<a class="anchor-link" href="#IDEA">¶</a></h3><ul>
+<li><em>I</em>: medir cuantos tracks unicos reales hay.</li>
+<li><em>D</em>: track_id, track_name, artists.</li>
+<li><em>E</em>: comparar filas totales vs track_id unicos, detectar duplicados.</li>
+<li><em>A</em>: crear df_unique_tracks sin duplicados por track_id.</li>
+</ul>
+<p><em>Criterio de exito</em>: reportar total_rows, unique_track_ids, duplicated_rows.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=430c3ba5-5b9a-4672-acf2-57fe6deb690a">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<ol>
-<li>A</li>
-<li>B</li>
-<li>C</li>
-</ol>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=f0425c15-2a64-458d-9159-e86c7dadb786">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"Hola Mundo"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Hola Mundo
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=abb14370-0421-4fe8-a042-2110c851709e">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2f3b7fa6-f3ae-46f8-b47f-c4fa782a1127">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7856,28 +7820,14 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">var1</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">var2</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">res</span> <span class="o">=</span> <span class="nb">print</span><span class="p">(</span><span class="n">var1</span> <span class="o">+</span> <span class="n">var2</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>3
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=f252fcc1-4e55-4117-9889-199ea28fb724">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=3b988a67-fa03-420f-b702-c03bf033c40b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7885,8 +7835,35 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">var1</span> <span class="o">=</span> <span class="s1">'hola'</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">var1</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">raw_data</span> <span class="o">=</span> <span class="s2">"dataset.csv"</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">raw_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4270294c-116b-4a1a-8ac8-927447327d69">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Calcular-el-n%C3%BAmero-total-de-filas">Calcular el número total de filas<a class="anchor-link" href="#Calcular-el-n%C3%BAmero-total-de-filas">¶</a></h2>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=311ac6b2-7b01-4eb5-aea0-fea50f84a9b8">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">total_rows</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Total rows:"</span><span class="p">,</span> <span class="n">total_rows</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -7899,35 +7876,24 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>hola
+<pre>Total rows: 114000
 </pre>
 </div>
 </div>
 </div>
 </div>
-</div>Podemos usar RAW para que se vea el codigo pero no ejecutará nada. Podría ser considerado como un tipo comentario. Tarea jugar codecombat hasta finalizar la prueba gratuita (12 niveles) tomar captura del mapa y subirla al repo del portafolio.
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=10b6e08f-7cfa-401a-bc12-c463b3843322">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=602de528-34ec-43b9-8bb1-cc3e7cd8ca32">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="IDEA">IDEA<a class="anchor-link" href="#IDEA">¶</a></h3><ul>
-<li>Intención: ¿Qué quiero lograr?</li>
-<li>Datos: Input y Output -- ejemplo: entrada csv, pdf, etc | salida: reportes, imagenes, valores limpios.</li>
-<li>Estrategia: ¿Qué pasos voy a seguir? 1. Recibir el archivo, 2. procesar el archivo, 3. Limpiar el archivo, 4. etc. Datos estructurados (tablas, separados por ",")</li>
-<li>Aplicación: ¿Cómo se escribe en *python(pyspark, o java, otros)? - Cómo lo voy a aterrizar ?</li>
-</ul>
-<h2 id="Guardar-informacion-en-variables">Guardar informacion en variables<a class="anchor-link" href="#Guardar-informacion-en-variables">¶</a></h2><ul>
-<li>I: Guardar nombres y edades</li>
-<li>D: De quién? R= Del curso de AWS de Benjamin</li>
-<li>E: Usar variables para guardar estos datos</li>
-<li>A: Con qué? con python</li>
-</ul>
+<h2 id="Contar-track_id-%C3%BAnicos">Contar track_id únicos<a class="anchor-link" href="#Contar-track_id-%C3%BAnicos">¶</a></h2>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=d1781767-8847-4065-821e-8fad9c378359">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=75809b1d-5f91-40a2-9046-fd97b05516c2">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7935,11 +7901,9 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">nombre</span> <span class="o">=</span> <span class="s2">"Dante"</span>
-<span class="n">edad</span> <span class="o">=</span> <span class="mi">30</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">nombre</span><span class="p">,</span> <span class="n">edad</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">nombre</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">edad</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">unique_track_ids</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"track_id"</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Unique track IDs:"</span><span class="p">,</span> <span class="n">unique_track_ids</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -7952,26 +7916,64 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Dante 30
-Dante
-30
+<pre>Unique track IDs: 89741
 </pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b62930bc-8365-4caa-b46e-6a54e37ee8c2">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7dcf906a-893d-48a7-b09b-07ab0dca566f">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Tipos-de-dato">Tipos de dato<a class="anchor-link" href="#Tipos-de-dato">¶</a></h3>
+<h2 id="Contar-filas-duplicadas">Contar filas duplicadas<a class="anchor-link" href="#Contar-filas-duplicadas">¶</a></h2>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=27d84d9e-1777-4c09-b11e-b4ac2348eb70">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=542a5ba8-4d60-4884-8a23-4459a1535f62">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">duplicated_rows</span> <span class="o">=</span> <span class="n">total_rows</span> <span class="o">-</span> <span class="n">unique_track_ids</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Duplicated rows:"</span><span class="p">,</span> <span class="n">duplicated_rows</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Duplicated rows: 24259
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a9404827-8f8c-42ae-a1f0-ab2cf5661835">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Detectar-duplicados">Detectar duplicados<a class="anchor-link" href="#Detectar-duplicados">¶</a></h2>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=5a3f62d1-2699-46d7-b596-75a33189187c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7979,15 +7981,7 @@ Dante
 <div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">texto</span> <span class="o">=</span> <span class="s2">"hola"</span>
-<span class="n">entero</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">decimalFlotante</span> <span class="o">=</span> <span class="mf">10.0</span>
-<span class="n">boolean</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="c1"># Para saber el tipo de dato que estamos usando: </span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">texto</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">entero</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">decimalFlotante</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">boolean</span><span class="p">))</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">duplicated</span><span class="p">(</span><span class="s2">"track_id"</span><span class="p">)]</span>
 </pre></div>
 </div>
 </div>
@@ -7997,19 +7991,335 @@ Dante
 <div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>&lt;class 'str'&gt;
-&lt;class 'int'&gt;
-&lt;class 'float'&gt;
-&lt;class 'bool'&gt;
-</pre>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Unnamed: 0</th>
+<th>track_id</th>
+<th>artists</th>
+<th>album_name</th>
+<th>track_name</th>
+<th>popularity</th>
+<th>duration_ms</th>
+<th>explicit</th>
+<th>danceability</th>
+<th>energy</th>
+<th>...</th>
+<th>loudness</th>
+<th>mode</th>
+<th>speechiness</th>
+<th>acousticness</th>
+<th>instrumentalness</th>
+<th>liveness</th>
+<th>valence</th>
+<th>tempo</th>
+<th>time_signature</th>
+<th>track_genre</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>1925</th>
+<td>1925</td>
+<td>0CDucx9lKxuCZplLXUz0iX</td>
+<td>Buena Onda Reggae Club</td>
+<td>Disco 2</td>
+<td>Song for Rollins</td>
+<td>16</td>
+<td>219346</td>
+<td>False</td>
+<td>0.841</td>
+<td>0.5770</td>
+<td>...</td>
+<td>-7.544</td>
+<td>1</td>
+<td>0.0438</td>
+<td>0.2380</td>
+<td>0.860000</td>
+<td>0.0571</td>
+<td>0.8430</td>
+<td>90.522</td>
+<td>4</td>
+<td>afrobeat</td>
+</tr>
+<tr>
+<th>2155</th>
+<td>2155</td>
+<td>2aibwv5hGXSgw7Yru8IYTO</td>
+<td>Red Hot Chili Peppers</td>
+<td>Stadium Arcadium</td>
+<td>Snow (Hey Oh)</td>
+<td>80</td>
+<td>334666</td>
+<td>False</td>
+<td>0.427</td>
+<td>0.9000</td>
+<td>...</td>
+<td>-3.674</td>
+<td>1</td>
+<td>0.0499</td>
+<td>0.1160</td>
+<td>0.000017</td>
+<td>0.1190</td>
+<td>0.5990</td>
+<td>104.655</td>
+<td>4</td>
+<td>alt-rock</td>
+</tr>
+<tr>
+<th>3000</th>
+<td>3000</td>
+<td>5E30LdtzQTGqRvNd7l6kG5</td>
+<td>The Neighbourhood</td>
+<td>Wiped Out!</td>
+<td>Daddy Issues</td>
+<td>87</td>
+<td>260173</td>
+<td>False</td>
+<td>0.588</td>
+<td>0.5210</td>
+<td>...</td>
+<td>-9.461</td>
+<td>1</td>
+<td>0.0329</td>
+<td>0.0678</td>
+<td>0.149000</td>
+<td>0.1230</td>
+<td>0.3370</td>
+<td>85.012</td>
+<td>4</td>
+<td>alternative</td>
+</tr>
+<tr>
+<th>3002</th>
+<td>3002</td>
+<td>2K7xn816oNHJZ0aVqdQsha</td>
+<td>The Neighbourhood</td>
+<td>Hard To Imagine The Neighbourhood Ever Changing</td>
+<td>Softcore</td>
+<td>86</td>
+<td>206280</td>
+<td>False</td>
+<td>0.575</td>
+<td>0.5680</td>
+<td>...</td>
+<td>-5.509</td>
+<td>0</td>
+<td>0.0300</td>
+<td>0.0484</td>
+<td>0.000417</td>
+<td>0.2860</td>
+<td>0.3700</td>
+<td>93.986</td>
+<td>4</td>
+<td>alternative</td>
+</tr>
+<tr>
+<th>3003</th>
+<td>3003</td>
+<td>2QjOHCTQ1Jl3zawyYOpxh6</td>
+<td>The Neighbourhood</td>
+<td>I Love You.</td>
+<td>Sweater Weather</td>
+<td>93</td>
+<td>240400</td>
+<td>False</td>
+<td>0.612</td>
+<td>0.8070</td>
+<td>...</td>
+<td>-2.810</td>
+<td>1</td>
+<td>0.0336</td>
+<td>0.0495</td>
+<td>0.017700</td>
+<td>0.1010</td>
+<td>0.3980</td>
+<td>124.053</td>
+<td>4</td>
+<td>alternative</td>
+</tr>
+<tr>
+<th>...</th>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<th>113572</th>
+<td>113572</td>
+<td>1saXUvvFlAQaefZUFVmhCn</td>
+<td>Bethel Music;Paul McClure</td>
+<td>We Will Not Be Shaken (Live)</td>
+<td>Jesus We Love You - Live</td>
+<td>53</td>
+<td>415079</td>
+<td>False</td>
+<td>0.253</td>
+<td>0.3590</td>
+<td>...</td>
+<td>-8.482</td>
+<td>1</td>
+<td>0.0317</td>
+<td>0.3100</td>
+<td>0.000006</td>
+<td>0.3590</td>
+<td>0.1150</td>
+<td>115.348</td>
+<td>3</td>
+<td>world-music</td>
+</tr>
+<tr>
+<th>113605</th>
+<td>113605</td>
+<td>1Q5jFp1g2Ns4gBsHRpcqhu</td>
+<td>Bethel Music;Jenn Johnson;Michaela Gentile</td>
+<td>Simple</td>
+<td>In The Ordinary - Spontaneous</td>
+<td>50</td>
+<td>174971</td>
+<td>False</td>
+<td>0.490</td>
+<td>0.2310</td>
+<td>...</td>
+<td>-13.968</td>
+<td>1</td>
+<td>0.0265</td>
+<td>0.6070</td>
+<td>0.000000</td>
+<td>0.0859</td>
+<td>0.0904</td>
+<td>103.958</td>
+<td>4</td>
+<td>world-music</td>
+</tr>
+<tr>
+<th>113617</th>
+<td>113617</td>
+<td>71dLJx3qHOTQMTvvoE2dmd</td>
+<td>Bethel Music;Amanda Cook</td>
+<td>Peace</td>
+<td>King of My Heart</td>
+<td>48</td>
+<td>330840</td>
+<td>False</td>
+<td>0.515</td>
+<td>0.0736</td>
+<td>...</td>
+<td>-15.492</td>
+<td>1</td>
+<td>0.0310</td>
+<td>0.9750</td>
+<td>0.000261</td>
+<td>0.0820</td>
+<td>0.0684</td>
+<td>109.964</td>
+<td>4</td>
+<td>world-music</td>
+</tr>
+<tr>
+<th>113619</th>
+<td>113619</td>
+<td>6OG5TBCmuTOuWCzSGsETrE</td>
+<td>Bethel Music;Brian Johnson;Jenn Johnson</td>
+<td>Simple</td>
+<td>Simple</td>
+<td>48</td>
+<td>351236</td>
+<td>False</td>
+<td>0.624</td>
+<td>0.1240</td>
+<td>...</td>
+<td>-11.191</td>
+<td>1</td>
+<td>0.0280</td>
+<td>0.9170</td>
+<td>0.000000</td>
+<td>0.1200</td>
+<td>0.2060</td>
+<td>78.014</td>
+<td>4</td>
+<td>world-music</td>
+</tr>
+<tr>
+<th>113641</th>
+<td>113641</td>
+<td>7xsirhcgFWOnItsGuBfrv9</td>
+<td>Bethel Music;Steffany Gretzinger</td>
+<td>For the Sake of the World</td>
+<td>Closer</td>
+<td>49</td>
+<td>413573</td>
+<td>False</td>
+<td>0.322</td>
+<td>0.5580</td>
+<td>...</td>
+<td>-8.321</td>
+<td>1</td>
+<td>0.0306</td>
+<td>0.0596</td>
+<td>0.000160</td>
+<td>0.1020</td>
+<td>0.0813</td>
+<td>139.920</td>
+<td>4</td>
+<td>world-music</td>
+</tr>
+</tbody>
+</table>
+<p>24259 rows × 21 columns</p>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=122b6c16-b9d2-491b-ae70-d62750ba0378">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a8361a40-adb6-4af4-ba18-49d95bd7ae4b">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Eliminar-duplicados">Eliminar duplicados<a class="anchor-link" href="#Eliminar-duplicados">¶</a></h2>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2e9a0189-4123-4c28-bd07-c9d66e0def7f">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8017,30 +8327,24 @@ Dante
 <div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Operaciones </span>
-<span class="n">venta1</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="n">venta2</span> <span class="o">=</span> <span class="mi">230</span>
-<span class="c1"># Se puede sumar: </span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Sumas: "</span> <span class="p">,</span> <span class="n">venta1</span> <span class="o">+</span> <span class="n">venta2</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">df_unique_tracks</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s2">"track_id"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Sumas:  330
-</pre>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=16d108f2-6af0-4b90-8f93-76bbc520eef4">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Verificar-el-resultado">Verificar el resultado<a class="anchor-link" href="#Verificar-el-resultado">¶</a></h2>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=115d519b-9240-4423-851b-7700c745256d">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=b4eac3aa-3703-4caa-9489-e3e6ea64fdb1">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8048,11 +8352,7 @@ Dante
 <div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Listas</span>
-<span class="n">ventas</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"toda la lista"</span><span class="p">,</span> <span class="n">ventas</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="s2">"Solo el primero"</span><span class="p">,</span> <span class="n">ventas</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="nb">print</span> <span class="p">(</span><span class="s2">"Solo el ultimo"</span><span class="p">,</span> <span class="n">ventas</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">df_unique_tracks</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
@@ -8062,274 +8362,22 @@ Dante
 <div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>toda la lista [1, 2, 3, 4, 5]
-Solo el primero 1
-Solo el ultimo 5
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=ef3b5a7b-c596-4db0-a2b5-754df9a875bb">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Condicionales</span>
-<span class="n">venta</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="k">if</span> <span class="n">venta</span> <span class="o">&gt;=</span> <span class="mi">150</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"venta alta"</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span> 
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Venta normal"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Venta normal
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=dd83336d-a43c-4361-82d1-04e04ca077c4">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=185b9a66-17c5-4994-8aad-51e7da10e556">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Ciclos</span>
-<span class="n">ventas_almacen</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">550</span><span class="p">,</span> <span class="mi">230</span><span class="p">]</span>
-<span class="k">for</span> <span class="n">venta</span> <span class="ow">in</span> <span class="n">ventas_almacen</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Revisión de ventas de almacén: "</span><span class="p">,</span> <span class="n">venta</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Revisión de ventas de almacén:  1100
-Revisión de ventas de almacén:  200
-Revisión de ventas de almacén:  30
-Revisión de ventas de almacén:  550
-Revisión de ventas de almacén:  230
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=346c4775-9c3f-47eb-a365-38885c46c6d2">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># funciones</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">duplicar</span><span class="p">(</span><span class="n">numero</span><span class="p">):</span>
-    <span class="n">resultado</span> <span class="o">=</span> <span class="n">numero</span> <span class="o">*</span> <span class="mi">2</span>
-    <span class="k">return</span> <span class="n">resultado</span>
-
-<span class="nb">print</span> <span class="p">(</span><span class="n">duplicar</span><span class="p">(</span><span class="mi">11</span><span class="p">))</span>
-<span class="nb">print</span> <span class="p">(</span><span class="n">duplicar</span><span class="p">(</span><span class="mi">113</span><span class="p">))</span>
-<span class="nb">print</span> <span class="p">(</span><span class="n">duplicar</span><span class="p">(</span><span class="mi">124</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>22
-226
-248
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=015356a1-ef27-405a-838c-fafa74e45438">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Diccionarios</span>
-<span class="n">producto</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">"nombre"</span><span class="p">:</span><span class="s2">"laptop"</span><span class="p">,</span>
-    <span class="s2">"precio"</span><span class="p">:</span><span class="mi">3000</span><span class="p">,</span>
-    <span class="s2">"categoria"</span><span class="p">:</span> <span class="s2">"Tecnología"</span>
-<span class="p">}</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">producto</span><span class="p">[</span><span class="s2">"nombre"</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">producto</span><span class="p">[</span><span class="s2">"categoria"</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">producto</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>laptop
-Tecnología
-{'nombre': 'laptop', 'precio': 3000, 'categoria': 'Tecnología'}
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=b9ec35db-e813-48e8-ae8b-bed3fe7f7b5d">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Ejercicio</span>
-<span class="n">ventas</span> <span class="o">=</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">]</span>
-<span class="n">suma</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">for</span> <span class="n">venta</span> <span class="ow">in</span> <span class="n">ventas</span><span class="p">:</span>
-    <span class="n">suma</span> <span class="o">=</span> <span class="n">suma</span> <span class="o">+</span> <span class="n">venta</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Total en ventas: "</span><span class="p">,</span> <span class="n">suma</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Total en ventas:  105
-</pre>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>(89741, 21)</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e317c518-2cbf-4a39-9357-080de9e9a392">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6ba40f27-f6fc-4966-89d4-7f3ddb614344">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Resuelve-este-problema-usando-IDEA-antes-de-escribir-c%C3%B3digo:">Resuelve este problema usando IDEA antes de escribir código:<a class="anchor-link" href="#Resuelve-este-problema-usando-IDEA-antes-de-escribir-c%C3%B3digo:">¶</a></h3><h3 id="Problema:-Tienes-estas-ventas:">Problema: Tienes estas ventas:<a class="anchor-link" href="#Problema:-Tienes-estas-ventas:">¶</a></h3><ul>
-<li>[100, 300, 150, 400, 250]</li>
-</ul>
-<h3 id="Necesitas:">Necesitas:<a class="anchor-link" href="#Necesitas:">¶</a></h3><ul>
-<li>calcular el total,</li>
-<li>calcular el promedio,</li>
-<li>imprimir cuáles ventas son altas (&gt;= 250).</li>
-<li>Antes de programar, escribe:</li>
-<li>I: Quiero: Calcular el total de ventas, el promedio de ventas, saber cuales son ventas altas</li>
-<li>D: Input - [100, 300, 150, 400, 250] - Output - Total ventas, promedio ventas, ventas altas: 300, 400, 250</li>
-<li>E: Pasos: 1. Iterar sobre la lista de ventas. 2. Sumar cada ventan en un total. 3. Del totalVentas dividir entre el numero de ventas. 4. implementar condicional para saber si es alta o no.</li>
-<li>A: Voy a utilizar un "for" para iterar, 3 variables extras para saber el total, promedio y ventas altas.</li>
-</ul>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=81fe531f-4254-4327-962c-86b605430d68">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [17]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">ventas</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">250</span><span class="p">]</span>
-<span class="n">totalVentas</span> <span class="o">=</span> <span class="mi">0</span> 
-<span class="k">for</span> <span class="n">venta</span> <span class="ow">in</span> <span class="n">ventas</span><span class="p">:</span>
-    <span class="n">totalVentas</span> <span class="o">=</span> <span class="n">totalVentas</span> <span class="o">+</span> <span class="n">venta</span>
-    <span class="k">if</span> <span class="n">venta</span> <span class="o">&gt;=</span> <span class="mi">250</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Venta alta: $"</span><span class="p">,</span> <span class="n">venta</span><span class="p">)</span>
-<span class="n">promedio</span> <span class="o">=</span> <span class="n">totalVentas</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">ventas</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Total en ventas: $"</span><span class="p">,</span> <span class="n">totalVentas</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Promedio en ventas: $"</span><span class="p">,</span> <span class="n">promedio</span><span class="p">)</span>
-
-<span class="c1">##############################</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"=============================================="</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Version simplificada"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Version simplificada - Total en Ventas: $"</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">ventas</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Version simplificada - Promedio en ventas: $"</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">ventas</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">ventas</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Version simplificada - Ventas altas: "</span><span class="p">,</span> <span class="p">[</span><span class="n">venta</span> <span class="k">for</span> <span class="n">venta</span> <span class="ow">in</span> <span class="n">ventas</span> <span class="k">if</span> <span class="n">venta</span> <span class="o">&gt;=</span> <span class="mi">250</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Venta alta: $ 300
-Venta alta: $ 400
-Venta alta: $ 250
-Total en ventas: $ 1200
-Promedio en ventas: $ 240.0
-==============================================
-Version simplificada
-Version simplificada - Total en Ventas: $ 1200
-Version simplificada - Promedio en ventas: $ 240.0
-Version simplificada - Ventas altas:  [300, 400, 250]
-</pre>
-</div>
+<h2 id="Equipo-2:-Victor-Manuel-Martinez-y-Ra%C3%BAl-De-Jes%C3%BAs-Vargas-Hern%C3%A1ndez">Equipo 2: Victor Manuel Martinez y Raúl De Jesús Vargas Hernández<a class="anchor-link" href="#Equipo-2:-Victor-Manuel-Martinez-y-Ra%C3%BAl-De-Jes%C3%BAs-Vargas-Hern%C3%A1ndez">¶</a></h2>
 </div>
 </div>
 </div>

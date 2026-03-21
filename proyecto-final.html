@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Final | Data Academy Xideral</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #070f1e;
+            --bg-soft: #0f1b31;
+            --panel: rgba(11, 24, 45, 0.88);
+            --panel-strong: #11243f;
+            --border: rgba(88, 149, 255, 0.3);
+            --line: rgba(255, 255, 255, 0.08);
+            --text: #f2f7ff;
+            --heading: #b6d3ff;
+            --body: #c5d8f6;
+            --muted: #8ba5cb;
+            --cyan: #22d3ee;
+            --blue: #60a5fa;
+            --mint: #34d399;
+            --gold: #f8d36f;
+            --radius-xl: 28px;
+            --radius-lg: 18px;
+            --radius-md: 14px;
+            --shadow: 0 26px 70px rgba(2, 7, 16, 0.55);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Space Grotesk", sans-serif;
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.65;
+            background:
+                radial-gradient(circle at 15% 0%, rgba(34, 211, 238, 0.16), transparent 30%),
+                radial-gradient(circle at 90% 4%, rgba(96, 165, 250, 0.14), transparent 26%),
+                radial-gradient(circle at 50% 110%, rgba(52, 211, 153, 0.14), transparent 32%),
+                linear-gradient(180deg, #050a15 0%, #0a1529 45%, #070f1e 100%);
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 34px 34px;
+            pointer-events: none;
+            mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.7), transparent 92%);
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .page {
+            width: min(1180px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 30px 0 80px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .top-actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 15px;
+            border-radius: 999px;
+            text-decoration: none;
+            border: 1px solid var(--border);
+            background: rgba(8, 19, 36, 0.72);
+            color: var(--body);
+            transition: 0.25s ease;
+            font-size: 0.92rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            border-color: var(--blue);
+            color: var(--text);
+        }
+
+        .btn.primary {
+            background: linear-gradient(135deg, rgba(34, 211, 238, 0.2), rgba(96, 165, 250, 0.2));
+            border-color: rgba(96, 165, 250, 0.45);
+        }
+
+        .hero {
+            margin-top: 22px;
+            padding: 40px;
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--border);
+            background: linear-gradient(140deg, rgba(9, 22, 44, 0.96), rgba(18, 36, 66, 0.86));
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            right: -60px;
+            top: -60px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(34, 211, 238, 0.24), transparent 70%);
+            animation: pulse 7s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.08); opacity: 1; }
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            padding: 7px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(34, 211, 238, 0.36);
+            background: rgba(34, 211, 238, 0.12);
+            color: #89f4ff;
+            font-size: 0.78rem;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            margin-top: 18px;
+            font-size: clamp(2.1rem, 6vw, 4.4rem);
+            line-height: 0.98;
+            max-width: 760px;
+        }
+
+        h1 span {
+            color: var(--heading);
+        }
+
+        .hero-copy {
+            margin-top: 16px;
+            max-width: 760px;
+            color: var(--body);
+            font-size: 1.03rem;
+        }
+
+        .stack {
+            margin-top: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .chip {
+            padding: 8px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.04);
+            color: #d7e8ff;
+            font-size: 0.86rem;
+        }
+
+        .kpis {
+            margin-top: 22px;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .kpi {
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+            background: rgba(10, 21, 40, 0.82);
+            padding: 18px;
+        }
+
+        .kpi strong {
+            display: block;
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+
+        .kpi span {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .section {
+            margin-top: 22px;
+            padding: 28px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            background: var(--panel);
+            box-shadow: var(--shadow);
+        }
+
+        .section-label {
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--cyan);
+            margin-bottom: 8px;
+        }
+
+        h2 {
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            margin-bottom: 10px;
+            color: var(--heading);
+        }
+
+        .section p {
+            color: var(--body);
+        }
+
+        .flow {
+            margin-top: 16px;
+            display: grid;
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .flow-step {
+            border: 1px solid var(--line);
+            border-radius: var(--radius-md);
+            padding: 14px;
+            background: rgba(255, 255, 255, 0.03);
+            min-height: 130px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .flow-step b {
+            color: var(--text);
+            font-size: 0.95rem;
+        }
+
+        .flow-step span {
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        .media-grid {
+            margin-top: 16px;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .media-card {
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .media-card img {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+            min-height: 220px;
+        }
+
+        .media-card .meta {
+            padding: 12px;
+            font-size: 0.9rem;
+            color: var(--body);
+        }
+
+        .strategy-grid {
+            margin-top: 14px;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .strategy {
+            border: 1px solid var(--line);
+            border-radius: var(--radius-md);
+            background: rgba(255, 255, 255, 0.03);
+            padding: 16px;
+        }
+
+        .strategy h3 {
+            color: var(--text);
+            font-size: 1rem;
+            margin-bottom: 6px;
+        }
+
+        .strategy p {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .terminal {
+            margin-top: 14px;
+            padding: 14px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--line);
+            background: #061122;
+            color: #b7cdf2;
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 0.88rem;
+            white-space: pre-wrap;
+        }
+
+        footer {
+            margin-top: 26px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.84rem;
+        }
+
+        @media (max-width: 920px) {
+            .kpis {
+                grid-template-columns: 1fr;
+            }
+
+            .flow {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .media-grid,
+            .strategy-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .page {
+                width: min(1180px, calc(100% - 22px));
+                padding-top: 20px;
+            }
+
+            .hero,
+            .section {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <div class="top-actions">
+            <a class="btn" href="./index.html">&larr; Volver al portafolio</a>
+            <a class="btn primary" href="http://172.30.33.105:8501/" target="_blank" rel="noopener noreferrer">Abrir App Streamlit &rarr;</a>
+        </div>
+
+        <header class="hero">
+            <div class="eyebrow">Proyecto Final · Data Academy Xideral</div>
+            <h1>Pipeline de datos escalable <span>con Lambda, PySpark, Hadoop y Streamlit</span></h1>
+            <p class="hero-copy">
+                Este proyecto integra un flujo de datos completo de extraccion, limpieza, transformacion y visualizacion.
+                Utiliza una Lambda para la extraccion inicial de datos, almacenamiento en S3 y un conjunto de scripts de Python
+                segmentados por tipo de dataset (pequeno y grande), incorporando PySpark sobre Hadoop para procesamiento distribuido.
+                Los resultados se publican en una app de analitica en Streamlit.
+            </p>
+            <div class="stack">
+                <span class="chip">Python</span>
+                <span class="chip">Pandas</span>
+                <span class="chip">PySpark</span>
+                <span class="chip">AWS Lambda</span>
+                <span class="chip">Amazon S3</span>
+                <span class="chip">Streamlit</span>
+                <span class="chip">Hadoop</span>
+                <span class="chip">Docker</span>
+            </div>
+            <div class="kpis">
+                <div class="kpi">
+                    <strong>1 Lambda</strong>
+                    <span>Extraccion de datos crudos y carga inicial en S3</span>
+                </div>
+                <div class="kpi">
+                    <strong>Scripts segmentados</strong>
+                    <span>Limpieza y transformacion con Python, Pandas y PySpark segun volumen de datos</span>
+                </div>
+                <div class="kpi">
+                    <strong>1 Dashboard</strong>
+                    <span>Visualizacion de KPIs en Streamlit desplegada en red interna</span>
+                </div>
+            </div>
+        </header>
+
+        <section class="section">
+            <div class="section-label">Descripcion general</div>
+            <h2>Que resuelve el proyecto</h2>
+            <p>
+                El objetivo principal es transformar datos crudos en informacion util para toma de decisiones.
+                El sistema consulta archivos de entrada, aplica reglas de limpieza y deja artefactos listos para consumo
+                en una aplicacion Streamlit. El flujo aprovecha AWS para separar el procesamiento pesado de la capa de
+                presentacion y mantener una experiencia de uso ligera.
+            </p>
+        </section>
+
+        <section class="section">
+            <div class="section-label">Arquitectura</div>
+            <h2>Capa de datos, computo y visualizacion</h2>
+            <p>
+                La arquitectura sigue un patron modular: Lambda para extraccion inicial, S3 como almacenamiento central,
+                scripts Python/Pandas/PySpark para limpieza y transformacion por tipo de dataset, y Streamlit para analitica
+                interactiva. Esto facilita mantenimiento, escalabilidad y trazabilidad del pipeline.
+            </p>
+            <div class="terminal">Fuente de datos (NYC TLC) -> Lambda (extraccion) -> S3 raw -> Scripts Python/Pandas/PySpark (limpieza y transformacion) -> S3 curated/golden -> Streamlit</div>
+        </section>
+
+        <section class="section">
+            <div class="section-label">Flujo de datos</div>
+            <h2>Operacion end-to-end del pipeline</h2>
+            <div class="flow">
+                <article class="flow-step">
+                    <b>1. Seleccion de fuente</b>
+                    <span>Se define periodo, dataset y archivo base para procesar.</span>
+                </article>
+                <article class="flow-step">
+                    <b>2. Lectura en S3</b>
+                    <span>Lambda 1 extrae datos de sitio web de NYC TLC para guardarlos como parquets en el S3.</span>
+                </article>
+                <article class="flow-step">
+                    <b>3. Limpieza</b>
+                    <span>Mediante scripts de python segmentados se realiza la Normalizacion de columnas, descarte de valores invalidos y estandarizacion.</span>
+                </article>
+                <article class="flow-step">
+                    <b>4. Escritura</b>
+                    <span>Mediante scripts de python se genera salida depurada en clean_data/ para siguiente etapa.</span>
+                </article>
+                <article class="flow-step">
+                    <b>5. Agregacion</b>
+                    <span>Mediante scripts de python se calculan resumenes en base a KPIs y se genera salida JSON/CSV para consumo.</span>
+                </article>
+                <article class="flow-step">
+                    <b>6. Dashboard</b>
+                    <span>Streamlit muestra KPIs y resultados con filtros de analisis.</span>
+                </article>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-label">Extracción de datos</div>
+            <h2>Codigo de extracción y evidencia</h2>
+            <p>
+                La etapa de extracción se encarga de obtener los datos crudos desde la fuente original (NYC TLC) y almacenarlos en S3.
+                A continuación se muestran capturas de código y resultados que evidencian esta parte del proceso
+            </p>
+            <div class="media-grid">
+                <figure class="media-card">
+                    <img src="./codigo_extraccion.png" alt="Codigo extracción 1" onerror="this.style.display='none';">
+                    <figcaption class="meta">Codigo principal de extracción como lambda.</figcaption>
+                </figure>
+                <figure class="media-card">
+                    <img src="./codigo_muestra_extraccion.png" alt="muestra extracción " onerror="this.style.display='none';">
+                    <figcaption class="meta">muestra de extraccion en S3.</figcaption>
+                </figure>
+            </div>
+        </section>
+    <section class="section">
+            <div class="section-label">Limpieza de datos</div>
+            <h2>Codigo de limpieza y evidencia</h2>
+            <p>
+                La etapa de limpieza aplica reglas para dejar los datos consistentes antes de agregarlos.
+                Aqui se muestran capturas de codigo y ejecucion utilizadas durante el desarrollo del pipeline.
+            </p>
+            <div class="media-grid">
+                <figure class="media-card">
+                    <img src="./clean_data.png" alt="Codigo limpieza 1" onerror="this.style.display='none';">
+                    <figcaption class="meta">Codigo de limpieza como python script.</figcaption>
+                </figure>
+                <figure class="media-card">
+                    <img src="./evidencia_clean_data.png" alt="Evidencia limpieza" onerror="this.style.display='none';">
+                    <figcaption class="meta">Evidencia de limpieza de datos en S3.</figcaption>
+                </figure>
+            </div>
+        </section>
+
+           <section class="section">
+            <div class="section-label">Transformación de datos</div>
+            <h2>Codigo de transformación y evidencia</h2>
+            <p>
+                La etapa de transformación aplica reglas para dejar los datos preparados en base a KPIs antes de agregarlos.
+                Aqui se muestran capturas de codigo y ejecucion utilizadas durante el desarrollo del pipeline.
+            </p>
+            <div class="media-grid">
+                <figure class="media-card">
+                    <img src="./transform_data.png" alt="Codigo transformacion" onerror="this.style.display='none';">
+                    <figcaption class="meta">Codigo de transformación como python script.</figcaption>
+                </figure>
+                <figure class="media-card">
+                    <img src="./evidencia_transform_data.png" alt="Evidencia transformacion" onerror="this.style.display='none';">
+                    <figcaption class="meta">Evidencia de transformación de datos en S3.</figcaption>
+                </figure>
+            </div>
+        </section>
+
+
+        <section class="section">
+            <div class="section-label">KPIs del dashboard</div>
+            <h2>Indicadores considerados para el analisis</h2>
+            <p>
+                El dashboard se construyo con indicadores operativos y financieros para evaluar volumen,
+                rentabilidad y eficiencia del servicio de taxis.
+            </p>
+            <div class="strategy-grid" style="margin-top: 16px;">
+                <article class="strategy">
+                    <h3>Tarifa media por viaje</h3>
+                    <p>Promedio del monto pagado por viaje en el periodo filtrado.</p>
+                </article>
+                <article class="strategy">
+                    <h3>Ingresos totales</h3>
+                    <p>Suma total de ingresos generados por los viajes seleccionados.</p>
+                </article>
+                <article class="strategy">
+                    <h3>Numero de viajes</h3>
+                    <p>Cantidad de registros de viajes procesados para la flota, anio y mes elegidos.</p>
+                </article>
+                <article class="strategy">
+                    <h3>Total de pasajeros</h3>
+                    <p>Acumulado de pasajeros transportados en el periodo analizado.</p>
+                </article>
+                <article class="strategy">
+                    <h3>Ingreso por milla</h3>
+                    <p>Relacion entre ingreso total y distancia recorrida para medir eficiencia del servicio.</p>
+                </article>
+                <article class="strategy">
+                    <h3>Distribucion por metodo de pago</h3>
+                    <p>Participacion porcentual por tipo de pago para entender patrones de cobro.</p>
+                </article>
+            </div>
+        </section>
+
+
+
+        <section class="section">
+            <div class="section-label">Dashboard Exitoso</div>
+            <h2>Resultados generados en base a KPIs</h2>
+            <div class="media-grid">
+                <figure class="media-card">
+                    <img src="./dash1.png" alt="Resultado Dashboard" onerror="this.style.display='none';">
+                    <figcaption class="meta">Dashboard generado a partir de los KPIs.</figcaption>
+                </figure>
+                <figure class="media-card">
+                    <img src="./dash2.png" alt="Resultado Dashboard 2" onerror="this.style.display='none';">
+                    <figcaption class="meta">Dashboard consolidado generado a partir de los KPIs.</figcaption>
+                </figure>
+               
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-label">Dashboard</div>
+            <h2>Proyecto final en accion</h2>
+            <p>
+                La app de Streamlit consume resultados del pipeline y permite explorar metricas de forma interactiva.
+                Accede aqui al despliegue actual del proyecto final:
+            </p>
+            <p style="margin-top: 12px;">
+                <a class="btn primary" href="http://172.30.33.105:8501/" target="_blank" rel="noopener noreferrer">Ir a la app de Streamlit</a>
+            </p>
+        </section>
+
+        <section class="section">
+            <div class="section-label">Patrones y estrategias</div>
+            <h2>Decisiones de diseno aplicadas</h2>
+            <div class="strategy-grid">
+                <article class="strategy">
+                    <h3>Carga lazy / bajo demanda</h3>
+                    <p>S3 funciona como cache de datos procesados. El pipeline evita reprocesar periodos ya calculados y solo ejecuta tareas cuando realmente se requieren nuevos artefactos.</p>
+                </article>
+                <article class="strategy">
+                    <h3>Invocacion asincronica</h3>
+                    <p>Las ejecuciones desacopladas permiten continuar con la experiencia de usuario mientras se completa el procesamiento en background.</p>
+                </article>
+                <article class="strategy">
+                    <h3>Separacion de capas</h3>
+                    <p>Datos en S3, computo en Lambda y presentacion en Streamlit. Cada capa puede evolucionar de forma independiente.</p>
+                </article>
+                <article class="strategy">
+                    <h3>Filtrado en cliente</h3>
+                    <p>El dashboard aplica filtros sobre estructuras en memoria para reducir consultas repetitivas y mejorar la latencia percibida.</p>
+                </article>
+                <article class="strategy">
+                    <h3>Variables de entorno</h3>
+                    <p>La configuracion sensible (credenciales, bucket, rutas) se gestiona fuera del codigo para mantener seguridad y facilitar despliegues.</p>
+                </article>
+                <article class="strategy">
+                    <h3>Contenedorizacion reproducible</h3>
+                    <p>El entorno de ejecucion se define con Docker para asegurar consistencia entre desarrollo y despliegue del dashboard final.</p>
+                </article>
+            </div>
+        </section>
+
+
+        <footer>
+            Proyecto Final · Data Academy Xideral · 2026
+        </footer>
+    </main>
+</body>
+</html>

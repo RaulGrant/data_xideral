@@ -969,6 +969,7 @@
             description: 'Integracion final de todas las tareas y ejercicios de la academia en una sola solucion aplicada de analisis, limpieza, automatizacion y despliegue de datos.',
             type: 'html',
             file: './proyecto-final.html',
+            externalLink: 'http://172.30.33.105:8501/',
             thumb: null,
             tags: ['Proyecto Final'],
             date: '2026',
@@ -1167,6 +1168,7 @@
                     '<div class="card-actions">' +
                         '<button class="card-action-btn preview" onclick="openPreview(' + i + ', \'' + filter + '\')">Vista Previa</button>' +
                         '<a class="card-action-btn open-tab" href="' + encodeURI(p.file) + '" target="_blank" rel="noopener noreferrer">Abrir &#8599;</a>' +
+                        (p.externalLink ? '<a class="card-action-btn open-tab" href="' + encodeURI(p.externalLink) + '" target="_blank" rel="noopener noreferrer">App Streamlit</a>' : '') +
                         '<a class="card-action-btn download" href="' + encodeURI(p.file) + '" download>Descargar</a>' +
                     '</div>' +
                 '</div>' +
